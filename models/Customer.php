@@ -12,4 +12,8 @@ class Customer {
         $customers = $pdostmt->fetchAll(PDO::FETCH_ASSOC);
         return $customers;
     }
+    
+    public function upsertCustomer($customer) {
+        
+    }
 }
