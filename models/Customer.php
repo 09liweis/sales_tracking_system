@@ -35,6 +35,7 @@ class Customer {
                 month = VALUES(`month`),
                 day = VALUES(`day`),
                 location = VALUES(`location`),
+                item_name = VALUES(`item_name`),
                 quantity = VALUES(`quantity`),
                 payment = VALUES(`payment`),
                 cost = VALUES(`cost`),
