@@ -52,7 +52,6 @@ class App extends React.Component {
         });
     }
     editCustomer(customer) {
-        console.log(customer);
         this.setState({
             modal: true,
             customer: customer
@@ -73,13 +72,14 @@ class App extends React.Component {
         });
     }
     handleSubmit(customer) {
+        const _this = this;
         $.ajax({
             url: 'controllers/customers.php?action=upsertCustomer',
             method: 'POST',
-            data: customer,
-            success() {
-                
-            }
+            data: customer
+        }).done(function(res) {
+            console.log('test');
+            _this.closeModal();
         });
     }
     render() {

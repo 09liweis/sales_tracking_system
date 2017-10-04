@@ -35,9 +35,16 @@ class Form extends React.Component {
             );
         });
         return (
-            <form className="columns is-multiline box" onSubmit={this.handleSubmit}>
-                {inputs}
-                <button className="button is-primary">Submit</button>
+            <form className="columns is-multiline box" autoComplete="off" onSubmit={this.handleSubmit}>
+                <div className="field">
+                    <label className="label">Date</label>
+                    <div className="control">
+                        <input className="input" type="date" />
+                    </div>
+                </div>
+                <div className="column is-2">
+                    <button className="button is-primary">Submit</button>
+                </div>
             </form>
         );
     }

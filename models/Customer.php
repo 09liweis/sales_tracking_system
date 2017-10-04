@@ -15,9 +15,7 @@ class Customer {
     
     public function upsertCustomer($customer) {
         $id = $customer['id'];
-        $year = $customer['year'];
-        $month = $customer['month'];
-        $day = $customer['day'];
+        $date = $customer['date'];
         $location = $customer['location'];
         $item_name = $customer['item_name'];
         $quantity = $customer['quantity'];
@@ -28,12 +26,10 @@ class Customer {
         $profit_or_loss = $customer['profit_or_loss'];
         $status = $customer['status'];
         $remarks = $customer['remarks'];
-        $sql = 'INSERT INTO customers (id, year, month, day, location, item_name, quantity, payment, cost, shipping_fee, packaging, profit_or_loss, status, remarks)
-                VALUES (:id, :year, :month, :day, :location, :item_name, :quantity, :payment, :cost, :shipping_fee, :packaging, :profit_or_loss, :status, :remarks)
+        $sql = 'INSERT INTO customers (id, date, location, item_name, quantity, payment, cost, shipping_fee, packaging, profit_or_loss, status, remarks)
+                VALUES (:id, :date, :location, :item_name, :quantity, :payment, :cost, :shipping_fee, :packaging, :profit_or_loss, :status, :remarks)
                 ON DUPLICATE KEY UPDATE
-                year = VALUES(`year`),
-                month = VALUES(`month`),
-                day = VALUES(`day`),
+                date = VALUES(`date`),
                 location = VALUES(`location`),
                 item_name = VALUES(`item_name`),
                 quantity = VALUES(`quantity`),
@@ -47,9 +43,7 @@ class Customer {
                 ';
         $pdostmt = $this->db->prepare($sql);
         $pdostmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $pdostmt->bindValue(':year', $year, PDO::PARAM_STR);
-        $pdostmt->bindValue(':month', $month, PDO::PARAM_STR);
-        $pdostmt->bindValue(':day', $day, PDO::PARAM_STR);
+        $pdostmt->bindValue(':date', $year, PDO::PARAM_STR);
         $pdostmt->bindValue(':location', $location, PDO::PARAM_STR);
         $pdostmt->bindValue(':item_name', $item_name, PDO::PARAM_STR);
         $pdostmt->bindValue(':quantity', $quantity, PDO::PARAM_STR);
