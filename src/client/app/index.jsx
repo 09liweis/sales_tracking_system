@@ -14,9 +14,7 @@ class App extends React.Component {
             customers: [],
             customer: {
                 id: 0,
-                year: 2017,
-                month: 9,
-                day: 30,
+                date: '2017-10-4',
                 location: 'guangzhou',
                 item_name: 'item name',
                 quantity: 3,
@@ -36,6 +34,9 @@ class App extends React.Component {
         this.editCustomer = this.editCustomer.bind(this);
     }
     componentDidMount() {
+        this.getCustomers();
+    }
+    getCustomers() {
         const _this = this;
         $.ajax({
             url: '/controllers/customers.php?action=getCustomers',
@@ -71,15 +72,16 @@ class App extends React.Component {
             customer: customer
         });
     }
-    handleSubmit(customer) {
+    handleSubmit(c) {
+        c.profit_or_loss = c.payment - c.cost - c.shipping_fee - c.packaging;
         const _this = this;
         $.ajax({
             url: 'controllers/customers.php?action=upsertCustomer',
             method: 'POST',
-            data: customer
-        }).done(function(res) {
-            console.log('test');
-            _this.closeModal();
+            data: c,
+            success(res) {
+                _this.closeModal();
+            }
         });
     }
     render() {

@@ -23,7 +23,7 @@ class Customers extends React.Component {
         const day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
         const today = year + '-' + month + '-' + day;
         const _this = this;
-        const customers = this.sort();
+        const customers = this.props.customers;
         var totalToday = 0.0;
         var totalMonth = 0.0;
         customers.map((c) => {
@@ -45,7 +45,7 @@ class Customers extends React.Component {
                 <th>{c.shipping_fee}</th>
                 <th>{c.packaging}</th>
                 <th className={(c.profit_or_loss < 0) ? 'has-text-danger' : ''}>{c.profit_or_loss}</th>
-                <th>{c.status}</th>
+                <th>{c.status == '0' ? '已发货' : '已收货'}</th>
                 <th>{c.remarks}</th>
                 <th>
                     <button className="button is-danger" onClick={_this.props.editCustomer.bind(_this, c)}>Edit</button>

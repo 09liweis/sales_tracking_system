@@ -43,7 +43,7 @@ class Customer {
                 ';
         $pdostmt = $this->db->prepare($sql);
         $pdostmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $pdostmt->bindValue(':date', $year, PDO::PARAM_STR);
+        $pdostmt->bindValue(':date', $date, PDO::PARAM_STR);
         $pdostmt->bindValue(':location', $location, PDO::PARAM_STR);
         $pdostmt->bindValue(':item_name', $item_name, PDO::PARAM_STR);
         $pdostmt->bindValue(':quantity', $quantity, PDO::PARAM_STR);
