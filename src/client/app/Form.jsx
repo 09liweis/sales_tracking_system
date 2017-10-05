@@ -9,11 +9,13 @@ class Form extends React.Component {
             customer: this.props.customer,
             items: [],
             searchItems: [],
-            hideItems: true
+            hideItems: true,
+            salesItems: [],
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.searchItem = this.searchItem.bind(this);
         this.addItem = this.addItem.bind(this);
+        this.changeQuantity = this.changeQuantity.bind(this);
     }
     componentDidMount() {
         const _this = this;
@@ -45,10 +47,26 @@ class Form extends React.Component {
         });
     }
     addItem(item) {
-        console.log(item);
+        var salesItems = this.state.salesItems;
+        item.sales_quantity = 0;
+        salesItems.push(item);
         this.setState({
+            salesItems: salesItems,
             hideItems: true
-        })
+        });
+    }
+    changeQuantity(item, e) {
+        const value = e.target.value;
+        item.sales_quantity = value;
+        var salesItems = this.state.salesItems;
+        for (var i = 0; i < salesItems.length; i++) {
+            if (salesItems[i].id == item.id) {
+                salesItems[i] = item;
+            }
+        }
+        this.setState({
+            salesItems: salesItems
+        });
     }
     handleSubmit(e) {
         e.preventDefault();
@@ -61,6 +79,16 @@ class Form extends React.Component {
         const _this = this;
         const options = this.state.searchItems.map((item) => 
             <li key={item.id} onClick={_this.addItem.bind(_this, item)}>{item.name}</li>
+        );
+        const salesItems = this.state.salesItems.map((item) =>
+            <div key={item.id}>
+                <h5>{item.name}</h5>
+                <p>Cost: {item.cost}</p>
+                <p>Retail: {item.retail}</p>
+                <input type="number" className="input" onChange={_this.changeQuantity.bind(_this, item)}  />
+                <p>Total Cost: {item.cost * item.sales_quantity}</p>
+                <p>Total Retail: {item.retail * item.sales_quantity}</p>
+            </div>
         );
         return (
             <form className="box" autoComplete="off" onSubmit={this.handleSubmit}>
@@ -76,10 +104,11 @@ class Form extends React.Component {
                         
                         <div className="Search">
                             <input className="input" type="text" onChange={this.searchItem} />
-                            <ul className={this.hideItems ? 'is-hidden' : ''}>
+                            <ul className={this.state.hideItems ? 'is-hidden' : ''}>
                             {options}
                             </ul>
                         </div>
+                        {salesItems}
                     </div>
                     <div className="column">
                         <div className="field">

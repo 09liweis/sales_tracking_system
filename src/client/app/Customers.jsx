@@ -56,7 +56,7 @@ class Customers extends React.Component {
             <div>
                 <h2>Today: {totalToday}</h2>
                 <h2>This Month: {totalMonth}</h2>
-                <table className="table is-fullwidth">
+                <table className="table is-fullwidth is-striped is-narrow">
                     <thead>
                         <tr>
                             <th>日期</th>
