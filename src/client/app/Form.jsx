@@ -64,7 +64,18 @@ class Form extends React.Component {
                 salesItems[i] = item;
             }
         }
+        var customer = this.state.customer;
+        var total_cost = 0;
+        var total_sales = 0;
+        salesItems.map((item) => {
+            total_cost += item.cost * item.sales_quantity;
+            total_sales += item.retail * item.sales_quantity;
+        });
+        customer.payment = total_sales.toFixed(2);
+        customer.cost = total_cost.toFixed(2);
+        
         this.setState({
+            customer: customer,
             salesItems: salesItems
         });
     }
@@ -86,8 +97,8 @@ class Form extends React.Component {
                 <p>Cost: {item.cost}</p>
                 <p>Retail: {item.retail}</p>
                 <input type="number" className="input" onChange={_this.changeQuantity.bind(_this, item)}  />
-                <p>Total Cost: {item.cost * item.sales_quantity}</p>
-                <p>Total Retail: {item.retail * item.sales_quantity}</p>
+                <p>Total Cost: {parseFloat(item.cost).toFixed(2) * item.sales_quantity}</p>
+                <p>Total Retail: {parseFloat(item.retail).toFixed(2) * item.sales_quantity}</p>
             </div>
         );
         return (
