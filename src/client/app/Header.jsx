@@ -25,11 +25,8 @@ class Header extends React.Component {
                         <div className="navbar-item">
                             <div className="field is-grouped">
                                 <p className="control">
-                                    <a className="button is-primary" onClick={this.props.addCustomer}>
-                                        <span className="icon">
-                                            <i className="fa fa-download"></i>
-                                        </span>
-                                        <span>Add Customer</span>
+                                    <a className="button is-primary">
+                                        what ever
                                     </a>
                                 </p>
                             </div>
