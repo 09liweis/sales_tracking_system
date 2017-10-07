@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 class Header extends React.Component {
 
@@ -10,9 +11,9 @@ class Header extends React.Component {
         return (
             <nav className="navbar is-light" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
-                    <a className="navbar-item" href="http://bulma.io">
+                    <Link to="/" className="navbar-item">
                         <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28" />
-                    </a>
+                    </Link>
                     
                     <button className="button navbar-burger">
                         <span></span>
@@ -21,6 +22,9 @@ class Header extends React.Component {
                     </button>
                 </div>
                 <div className="navbar-menu">
+                    <div className="navbar-head">
+                        <Link to='/items'>Items</Link>
+                    </div>
                     <div className="navbar-end">
                         <div className="navbar-item">
                             <div className="field is-grouped">
