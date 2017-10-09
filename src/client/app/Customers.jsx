@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 
+import Transaction from './components/Transaction.jsx';
+
 class Customers extends React.Component {
 
     constructor(props) {
@@ -35,22 +37,7 @@ class Customers extends React.Component {
             }
         });
         const list = customers.map((c, i) =>
-            <tr key={c.id}>
-                <th>{c.date}</th>
-                <th>{c.location}</th>
-                <th>{c.item_name}</th>
-                <th>{c.quantity}</th>
-                <th>{c.payment}</th>
-                <th>{c.cost}</th>
-                <th>{c.shipping_fee}</th>
-                <th>{c.packaging}</th>
-                <th className={(c.profit_or_loss < 0) ? 'has-text-danger' : ''}>{c.profit_or_loss}</th>
-                <th>{c.status == '0' ? '已发货' : '已收货'}</th>
-                <th>{c.remarks}</th>
-                <th>
-                    <button className="button is-danger" onClick={_this.props.editCustomer.bind(_this, c)}>Edit</button>
-                </th>
-            </tr>
+            <Transaction key={c.id} c={c} editCustomer={_this.props.editCustomer.bind(_this, c)} />
         );
         return (
             <div>

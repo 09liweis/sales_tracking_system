@@ -72,6 +72,7 @@ class Home extends React.Component {
     }
     handleSubmit(c) {
         c.profit_or_loss = c.payment - c.cost - c.shipping_fee - c.packaging;
+        c.item_name = JSON.stringify(c.item_name);
         const _this = this;
         $.ajax({
             url: 'controllers/customers.php?action=upsertCustomer',

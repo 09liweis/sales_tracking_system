@@ -16,6 +16,8 @@ class Form extends React.Component {
         this.searchItem = this.searchItem.bind(this);
         this.addItem = this.addItem.bind(this);
         this.changeQuantity = this.changeQuantity.bind(this);
+        this.removeSalesItem = this.removeSalesItem.bind(this);
+        this.calculate = this.calculate.bind(this);
     }
     componentDidMount() {
         const _this = this;
@@ -55,6 +57,18 @@ class Form extends React.Component {
             hideItems: true
         });
     }
+    removeSalesItem(item) {
+        var salesItems = [];
+        this.state.salesItems.map((s) => {
+            if (s.id != item.id) {
+                salesItems.push(s);
+            }
+        });
+        this.setState({
+            salesItems: salesItems
+        });
+        this.calculate();
+    }
     changeQuantity(item, e) {
         const value = e.target.value;
         item.sales_quantity = value;
@@ -64,29 +78,34 @@ class Form extends React.Component {
                 salesItems[i] = item;
             }
         }
+        this.setState({
+            salesItems: salesItems
+        });
+        this.calculate();
+    }
+    calculate() {
         var customer = this.state.customer;
         var total_cost = 0;
         var total_sales = 0;
-        salesItems.map((item) => {
+        this.state.salesItems.map((item) => {
             total_cost += item.cost * item.sales_quantity;
             total_sales += item.retail * item.sales_quantity;
         });
         customer.payment = total_sales.toFixed(2);
         customer.cost = total_cost.toFixed(2);
-        
         this.setState({
-            customer: customer,
-            salesItems: salesItems
+            customer: customer
         });
     }
     handleSubmit(e) {
         e.preventDefault();
-        const customer = this.state.customer;
+        var customer = this.state.customer;
+        customer.item_name = this.state.salesItems;
         this.props.handleSubmit(customer);
     }
     render() {
         const c = this.state.customer;
-        var profit_or_loss = c.payment - c.cost - c.shipping_fee - c.packaging;
+        var profit_or_loss = (c.payment - c.cost - c.shipping_fee - c.packaging).toFixed(2);
         const _this = this;
         const options = this.state.searchItems.map((item) => 
             <li key={item.id} onClick={_this.addItem.bind(_this, item)}>{item.name}</li>
@@ -94,6 +113,7 @@ class Form extends React.Component {
         const salesItems = this.state.salesItems.map((item) =>
             <div key={item.id}>
                 <h5>{item.name}</h5>
+                <button onClick={_this.removeSalesItem.bind(_this, item)}>Remove</button>
                 <p>Cost: {item.cost}</p>
                 <p>Retail: {item.retail}</p>
                 <input type="number" className="input" onChange={_this.changeQuantity.bind(_this, item)}  />
@@ -106,13 +126,6 @@ class Form extends React.Component {
                 <input type="hidden" name="id" value={c.id} />
                 <div className="columns">
                     <div className="column">
-                        <div className="field">
-                            <label className="label">Item Name</label>
-                            <div className="control">
-                                <input className="input" type="text" name="item_name" value={c.item_name} onChange={this.props.handleChange} />
-                            </div>
-                        </div>
-                        
                         <div className="Search">
                             <input className="input" type="text" onChange={this.searchItem} />
                             <ul className={this.state.hideItems ? 'is-hidden' : ''}>

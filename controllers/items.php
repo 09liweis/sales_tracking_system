@@ -12,9 +12,11 @@ if ($_GET['action'] == 'getItems') {
     echo json_encode($items);
 }
 
-if ($_GET['action'] == 'upsertCustomer') {
+if ($_GET['action'] == 'upsertItem') {
     $item = $_POST;
-    //$itemRepo->upsertCustomer($item);
+    $itemRepo->upsertItem($item);
+    $result = array('msg' => 'success', 'code' => 200);
+    echo json_encode($result);
 }
 
 if ($_GET['action'] == 'importItems') {
