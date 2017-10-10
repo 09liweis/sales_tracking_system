@@ -10,9 +10,23 @@ class Home extends React.Component {
         this.state = {
             modal: false,
             customers: [],
+            customer: {}
+        };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.addCustomer = this.addCustomer.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.editCustomer = this.editCustomer.bind(this);
+        this.setEmptyCustomer = this.setEmptyCustomer.bind(this);
+    }
+    componentDidMount() {
+        this.getCustomers();
+    }
+    setEmptyCustomer() {
+        this.setState({
             customer: {
                 id: 0,
-                date: '2017-10-4',
+                date: '',
                 location: '',
                 item_name: '',
                 quantity: '',
@@ -24,15 +38,7 @@ class Home extends React.Component {
                 status: '0',
                 remarks: ''
             }
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.addCustomer = this.addCustomer.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-        this.editCustomer = this.editCustomer.bind(this);
-    }
-    componentDidMount() {
-        this.getCustomers();
+        });
     }
     getCustomers() {
         const _this = this;
@@ -80,6 +86,7 @@ class Home extends React.Component {
             data: c,
             success(res) {
                 _this.closeModal();
+                _this.setEmptyCustomer();
             }
         });
     }

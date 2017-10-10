@@ -6,7 +6,7 @@ class Customer {
     }
     
     public function customers() {
-        $sql = 'SELECT * FROM customers';
+        $sql = 'SELECT * FROM customers ORDER BY date DESC';
         $pdostmt = $this->db->prepare($sql);
         $pdostmt->execute();
         $customers = $pdostmt->fetchAll(PDO::FETCH_ASSOC);

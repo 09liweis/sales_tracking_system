@@ -31,8 +31,14 @@ class Form extends React.Component {
         });
     }
     componentWillReceiveProps(nextProps) {
+        const items = nextProps.customer.item_name;
+        if (typeof items != 'undefined' && items != '') {
+            this.setState({
+                salesItems: JSON.parse(items)
+            });
+        }
         this.setState({
-            customer: nextProps.customer
+            customer: nextProps.customer,
         });
     }
     searchItem(e) {
@@ -87,12 +93,15 @@ class Form extends React.Component {
         var customer = this.state.customer;
         var total_cost = 0;
         var total_sales = 0;
+        var total_quantity = 0;
         this.state.salesItems.map((item) => {
             total_cost += item.cost * item.sales_quantity;
             total_sales += item.retail * item.sales_quantity;
+            total_quantity += parseInt(item.sales_quantity);
         });
         customer.payment = total_sales.toFixed(2);
         customer.cost = total_cost.toFixed(2);
+        customer.quantity = total_quantity;
         this.setState({
             customer: customer
         });
@@ -116,7 +125,7 @@ class Form extends React.Component {
                 <button onClick={_this.removeSalesItem.bind(_this, item)}>Remove</button>
                 <p>Cost: {item.cost}</p>
                 <p>Retail: {item.retail}</p>
-                <input type="number" className="input" onChange={_this.changeQuantity.bind(_this, item)}  />
+                <input type="number" className="input" value={item.sales_quantity} onChange={_this.changeQuantity.bind(_this, item)}  />
                 <p>Total Cost: {parseFloat(item.cost).toFixed(2) * item.sales_quantity}</p>
                 <p>Total Retail: {parseFloat(item.retail).toFixed(2) * item.sales_quantity}</p>
             </div>
@@ -127,6 +136,7 @@ class Form extends React.Component {
                 <div className="columns">
                     <div className="column">
                         <div className="Search">
+                            <label>搜素商品</label>
                             <input className="input" type="text" onChange={this.searchItem} />
                             <ul className={this.state.hideItems ? 'is-hidden' : ''}>
                             {options}
