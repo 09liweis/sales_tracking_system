@@ -197,6 +197,9 @@ class Form extends React.Component {
                                 displayMode="portrait"
                                 value={c.date}
                                 onChange={this.onDateChange}
+                                formatOptions={{year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit',}}
                             />
                         </div>
                         <TextField
@@ -270,12 +273,15 @@ class Form extends React.Component {
                             value={c.status}
                             onChange={this.handleChange}
                         />
-                        <div className="field">
-                            <label className="label">Remarks</label>
-                            <div className="control">
-                                <input className="input" type="text" name="remarks" value={c.remarks} onChange={this.handleChange} />
-                            </div>
-                        </div>
+                        <TextField
+                            id="remarks"
+                            label="备注"
+                            name="remarks"
+                            value={c.remarks}
+                            onChange={this.handleChange}
+                            lineDirection="center"
+                            className="md-cell md-cell--bottom"
+                        />
                     </div>
                 </div>
                 <div className="">
