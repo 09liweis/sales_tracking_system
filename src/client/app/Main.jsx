@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from './Home.jsx';
+import Home from './pages/Home.jsx';
 import Form from './pages/Form.jsx';
 import Items from './components/Items.jsx';
 

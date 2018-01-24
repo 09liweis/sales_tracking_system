@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Customers from './Customers.jsx';
+import Customers from '../Customers.jsx';
 import $ from 'jquery';
 
 class Home extends React.Component {
