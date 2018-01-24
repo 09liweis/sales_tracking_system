@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-import { DatePicker } from 'react-md';
+import { DatePicker, TextField, SelectionControl } from 'react-md';
 
 
 class Form extends React.Component {
@@ -60,11 +60,10 @@ class Form extends React.Component {
             customer: nextProps.customer,
         });
     }
-    handleChange(event) {
-        const property = event.target.name;
-        const value = event.target.value;
+    handleChange(v, e) {
+        const property = e.target.name;
         const customer = this.state.customer;
-        customer[property] = value;
+        customer[property] = v;
         this.setState({
             customer: customer
         });
@@ -76,7 +75,7 @@ class Form extends React.Component {
                 value: val
             }
         };
-        this.handleChange(e);
+        this.handleChange(val, e);
     }
     searchItem(e) {
         const name = e.target.value;
@@ -200,48 +199,77 @@ class Form extends React.Component {
                                 onChange={this.onDateChange}
                             />
                         </div>
-                        <div className="field">
-                            <label className="label">Quantity</label>
-                            <div className="control">
-                                <input className="input" type="text" name="quantity" value={c.quantity} onChange={this.handleChange} />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label className="label">Payment</label>
-                            <div className="control">
-                                <input className="input" type="text" name="payment" value={c.payment} onChange={this.handleChange} />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label className="label">Cost</label>
-                            <div className="control">
-                                <input className="input" type="text" name="cost" value={c.cost} onChange={this.handleChange} />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label className="label">Shipping Fee</label>
-                            <div className="control">
-                                <input className="input" type="text" name="shipping_fee" value={c.shipping_fee} onChange={this.handleChange} />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label className="label">Packing</label>
-                            <div className="control">
-                                <input className="input" type="text" name="packaging" value={c.packaging} onChange={this.handleChange} />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label className="label">Profile or Loss</label>
-                            <div className="control">
-                                <input className="input" type="text" name="profit_or_loss" value={profit_or_loss} onChange={this.handleChange} />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <label className="label">Status</label>
-                            <div className="control">
-                                <input className="input" type="text" name="status" value={c.status} onChange={this.handleChange} />
-                            </div>
-                        </div>
+                        <TextField
+                            id="quantity"
+                            label="数量"
+                            name="quantity"
+                            value={c.quantity}
+                            onChange={this.handleChange}
+                            lineDirection="center"
+                            className="md-cell md-cell--bottom"
+                        />
+                        <TextField
+                            id="payment"
+                            label="Payment"
+                            name="payment"
+                            value={c.payment}
+                            onChange={this.handleChange}
+                            lineDirection="center"
+                            className="md-cell md-cell--bottom"
+                        />
+                        <TextField
+                            id="cost"
+                            label="Cost"
+                            name="cost"
+                            value={c.cost}
+                            onChange={this.handleChange}
+                            lineDirection="center"
+                            className="md-cell md-cell--bottom"
+                        />
+                        <TextField
+                            id="shipping_fee"
+                            label="运费"
+                            name="shipping_fee"
+                            value={c.shipping_fee}
+                            onChange={this.handleChange}
+                            lineDirection="center"
+                            className="md-cell md-cell--bottom"
+                        />
+                        <TextField
+                            id="packaging"
+                            label="包装费"
+                            name="packaging"
+                            value={c.packaging}
+                            onChange={this.handleChange}
+                            lineDirection="center"
+                            className="md-cell md-cell--bottom"
+                        />
+                        <TextField
+                            id="profit_or_loss"
+                            label="盈亏"
+                            name="profit_or_loss"
+                            value={c.profit_or_loss}
+                            onChange={this.handleChange}
+                            lineDirection="center"
+                            className="md-cell md-cell--bottom"
+                        />
+                        <TextField
+                            id="location"
+                            label="地址"
+                            name="location"
+                            value={c.location}
+                            onChange={this.handleChange}
+                            lineDirection="center"
+                            className="md-cell md-cell--bottom"
+                        />
+                        <SelectionControl
+                            id="status"
+                            type="switch"
+                            label="已发货"
+                            name="status"
+                            value={c.status}
+                            onChange={this.handleChange}
+                        />
                         <div className="field">
                             <label className="label">Remarks</label>
                             <div className="control">

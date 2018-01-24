@@ -30,8 +30,8 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                <Link to="/add" className="button" onClick={this.addCustomer}>Add</Link>
-                <Customers customers={this.state.customers} editCustomer={this.editCustomer} />
+                <Link to="/add" className="button">Add</Link>
+                <Customers customers={this.state.customers} />
             </div>
         );
     }

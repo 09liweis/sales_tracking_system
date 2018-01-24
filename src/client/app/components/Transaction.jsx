@@ -27,7 +27,7 @@ class Transaction extends React.Component {
                 <th>{c.status == '0' ? '已发货' : '已收货'}</th>
                 <th>{c.remarks}</th>
                 <th>
-                    <button className="button is-danger" onClick={this.props.editCustomer}>Edit</button>
+                    <button className="button is-danger">Edit</button>
                 </th>
             </tr>
         );
