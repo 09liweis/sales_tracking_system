@@ -145,9 +145,17 @@ class Form extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        var customer = this.state.customer;
-        customer.item_name = this.state.salesItems;
-        this.props.handleSubmit(customer);
+        var c = this.state.customer;
+        c.item_name = this.state.salesItems;
+        c.profit_or_loss = c.payment - c.cost - c.shipping_fee - c.packaging;
+        c.item_name = JSON.stringify(c.item_name);
+        $.ajax({
+            url: 'controllers/customers.php?action=upsertCustomer',
+            method: 'POST',
+            data: c,
+            success(res) {
+            }
+        });
     }
     render() {
         const c = this.state.customer;

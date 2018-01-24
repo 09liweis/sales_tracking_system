@@ -12,10 +12,6 @@ class Home extends React.Component {
             customers: [],
             customer: {}
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.addCustomer = this.addCustomer.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-        this.editCustomer = this.editCustomer.bind(this);
     }
     componentDidMount() {
         this.getCustomers();
@@ -28,35 +24,6 @@ class Home extends React.Component {
                 _this.setState({
                     customers: res
                 });
-            }
-        });
-    }
-    addCustomer() {
-        this.setState({
-            modal: true
-        });
-    }
-    editCustomer(customer) {
-        this.setState({
-            modal: true,
-            customer: customer
-        });
-    }
-    closeModal() {
-        this.setState({
-            modal: false
-        });
-    }
-    handleSubmit(c) {
-        c.profit_or_loss = c.payment - c.cost - c.shipping_fee - c.packaging;
-        c.item_name = JSON.stringify(c.item_name);
-        const _this = this;
-        $.ajax({
-            url: 'controllers/customers.php?action=upsertCustomer',
-            method: 'POST',
-            data: c,
-            success(res) {
-                _this.closeModal();
             }
         });
     }
