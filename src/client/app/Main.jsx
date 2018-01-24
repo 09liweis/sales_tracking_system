@@ -9,7 +9,8 @@ const Main = () => (
   <main className="container">
     <Switch>
       <Route exact path='/' component={Home}/>
-      <Route exact path='/add' component={Form}/>
+      <Route path='/add' component={Form}/>
+      <Route path='/edit/:id' component={Form}/>
       <Route path='/items' component={Items}/>
     </Switch>
   </main>

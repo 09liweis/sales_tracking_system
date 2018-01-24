@@ -9,7 +9,20 @@ class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            customer: this.props.customer,
+            customer: {
+                id: 0,
+                date: '',
+                location: '',
+                item_name: '',
+                quantity: '',
+                payment: '',
+                cost: '',
+                shipping_fee: '',
+                packaging: '',
+                profit_or_loss: '',
+                status: '0',
+                remarks: ''
+            },
             items: [],
             searchItems: [],
             hideItems: true,
@@ -22,8 +35,10 @@ class Form extends React.Component {
         this.removeSalesItem = this.removeSalesItem.bind(this);
         this.calculate = this.calculate.bind(this);
         this.onDateChange = this.onDateChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
     componentDidMount() {
+        console.log(this.props);
         const _this = this;
         $.ajax({
             url: '/controllers/items.php?action=getItems',
@@ -45,6 +60,15 @@ class Form extends React.Component {
             customer: nextProps.customer,
         });
     }
+    handleChange(event) {
+        const property = event.target.name;
+        const value = event.target.value;
+        const customer = this.state.customer;
+        customer[property] = value;
+        this.setState({
+            customer: customer
+        });
+    }
     onDateChange(val) {
         const e = {
             target: {
@@ -52,7 +76,7 @@ class Form extends React.Component {
                 value: val
             }
         };
-        this.props.handleChange(e);
+        this.handleChange(e);
     }
     searchItem(e) {
         const name = e.target.value;
@@ -145,7 +169,6 @@ class Form extends React.Component {
         );
         return (
             <form className="box" autoComplete="off" onSubmit={this.handleSubmit}>
-                <input type="hidden" name="id" value={c.id} />
                 <div className="columns">
                     <div className="column">
                         <div className="Search">
@@ -172,49 +195,49 @@ class Form extends React.Component {
                         <div className="field">
                             <label className="label">Quantity</label>
                             <div className="control">
-                                <input className="input" type="text" name="quantity" value={c.quantity} onChange={this.props.handleChange} />
+                                <input className="input" type="text" name="quantity" value={c.quantity} onChange={this.handleChange} />
                             </div>
                         </div>
                         <div className="field">
                             <label className="label">Payment</label>
                             <div className="control">
-                                <input className="input" type="text" name="payment" value={c.payment} onChange={this.props.handleChange} />
+                                <input className="input" type="text" name="payment" value={c.payment} onChange={this.handleChange} />
                             </div>
                         </div>
                         <div className="field">
                             <label className="label">Cost</label>
                             <div className="control">
-                                <input className="input" type="text" name="cost" value={c.cost} onChange={this.props.handleChange} />
+                                <input className="input" type="text" name="cost" value={c.cost} onChange={this.handleChange} />
                             </div>
                         </div>
                         <div className="field">
                             <label className="label">Shipping Fee</label>
                             <div className="control">
-                                <input className="input" type="text" name="shipping_fee" value={c.shipping_fee} onChange={this.props.handleChange} />
+                                <input className="input" type="text" name="shipping_fee" value={c.shipping_fee} onChange={this.handleChange} />
                             </div>
                         </div>
                         <div className="field">
                             <label className="label">Packing</label>
                             <div className="control">
-                                <input className="input" type="text" name="packaging" value={c.packaging} onChange={this.props.handleChange} />
+                                <input className="input" type="text" name="packaging" value={c.packaging} onChange={this.handleChange} />
                             </div>
                         </div>
                         <div className="field">
                             <label className="label">Profile or Loss</label>
                             <div className="control">
-                                <input className="input" type="text" name="profit_or_loss" value={profit_or_loss} onChange={this.props.handleChange} />
+                                <input className="input" type="text" name="profit_or_loss" value={profit_or_loss} onChange={this.handleChange} />
                             </div>
                         </div>
                         <div className="field">
                             <label className="label">Status</label>
                             <div className="control">
-                                <input className="input" type="text" name="status" value={c.status} onChange={this.props.handleChange} />
+                                <input className="input" type="text" name="status" value={c.status} onChange={this.handleChange} />
                             </div>
                         </div>
                         <div className="field">
                             <label className="label">Remarks</label>
                             <div className="control">
-                                <input className="input" type="text" name="remarks" value={c.remarks} onChange={this.props.handleChange} />
+                                <input className="input" type="text" name="remarks" value={c.remarks} onChange={this.handleChange} />
                             </div>
                         </div>
                     </div>

@@ -14,6 +14,11 @@ if ($_GET['action'] == 'getCustomers') {
     echo json_encode($customers);
 }
 
+if ($_GET['action'] == 'getCustomer') {
+    $customer = $customerRepo->customer($_GET['id']);
+    echo json_encode($customer);
+}
+
 if ($_GET['action'] == 'upsertCustomer') {
     $customer = $_POST;
     $customerRepo->upsertCustomer($customer);

@@ -13,32 +13,12 @@ class Home extends React.Component {
             customer: {}
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         this.addCustomer = this.addCustomer.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.editCustomer = this.editCustomer.bind(this);
-        this.setEmptyCustomer = this.setEmptyCustomer.bind(this);
     }
     componentDidMount() {
         this.getCustomers();
-    }
-    setEmptyCustomer() {
-        this.setState({
-            customer: {
-                id: 0,
-                date: '',
-                location: '',
-                item_name: '',
-                quantity: '',
-                payment: '',
-                cost: '',
-                shipping_fee: '',
-                packaging: '',
-                profit_or_loss: '',
-                status: '0',
-                remarks: ''
-            }
-        });
     }
     getCustomers() {
         const _this = this;
@@ -67,15 +47,6 @@ class Home extends React.Component {
             modal: false
         });
     }
-    handleChange(event) {
-        const property = event.target.name;
-        const value = event.target.value;
-        const customer = this.state.customer;
-        customer[property] = value;
-        this.setState({
-            customer: customer
-        });
-    }
     handleSubmit(c) {
         c.profit_or_loss = c.payment - c.cost - c.shipping_fee - c.packaging;
         c.item_name = JSON.stringify(c.item_name);
@@ -86,7 +57,6 @@ class Home extends React.Component {
             data: c,
             success(res) {
                 _this.closeModal();
-                _this.setEmptyCustomer();
             }
         });
     }
