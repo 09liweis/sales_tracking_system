@@ -1,6 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
 
+import { DatePicker } from 'react-md';
+
+
 class Form extends React.Component {
 
     constructor(props) {
@@ -18,6 +21,7 @@ class Form extends React.Component {
         this.changeQuantity = this.changeQuantity.bind(this);
         this.removeSalesItem = this.removeSalesItem.bind(this);
         this.calculate = this.calculate.bind(this);
+        this.onDateChange = this.onDateChange.bind(this);
     }
     componentDidMount() {
         const _this = this;
@@ -40,6 +44,15 @@ class Form extends React.Component {
         this.setState({
             customer: nextProps.customer,
         });
+    }
+    onDateChange(val) {
+        const e = {
+            target: {
+                name: 'date',
+                value: val
+            }
+        };
+        this.props.handleChange(e);
     }
     searchItem(e) {
         const name = e.target.value;
@@ -95,8 +108,8 @@ class Form extends React.Component {
         var total_sales = 0;
         var total_quantity = 0;
         this.state.salesItems.map((item) => {
-            total_cost += item.cost * item.sales_quantity;
-            total_sales += item.retail * item.sales_quantity;
+            total_cost += (item.cost * item.sales_quantity).toFixed(2);
+            total_sales += (item.retail * item.sales_quantity).toFixed(2);
             total_quantity += parseInt(item.sales_quantity);
         });
         customer.payment = total_sales.toFixed(2);
@@ -147,9 +160,14 @@ class Form extends React.Component {
                     <div className="column">
                         <div className="field">
                             <label className="label">Date</label>
-                            <div className="control">
-                                <input className="input" type="text" name="date" value={c.date} onChange={this.props.handleChange} />
-                            </div>
+                            <DatePicker
+                                id="appointment-date-portrait"
+                                label="Portrait mode"
+                                className="md-cell"
+                                displayMode="portrait"
+                                value={c.date}
+                                onChange={this.onDateChange}
+                            />
                         </div>
                         <div className="field">
                             <label className="label">Quantity</label>
