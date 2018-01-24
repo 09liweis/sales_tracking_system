@@ -150,11 +150,13 @@ class Form extends React.Component {
         c.item_name = this.state.salesItems;
         c.profit_or_loss = c.payment - c.cost - c.shipping_fee - c.packaging;
         c.item_name = JSON.stringify(c.item_name);
+        const _this = this;
         $.ajax({
             url: 'controllers/customers.php?action=upsertCustomer',
             method: 'POST',
             data: c,
             success(res) {
+                _this.props.history.push('/');
             }
         });
     }
@@ -253,7 +255,7 @@ class Form extends React.Component {
                             id="profit_or_loss"
                             label="盈亏"
                             name="profit_or_loss"
-                            value={c.profit_or_loss}
+                            value={profit_or_loss}
                             onChange={this.handleChange}
                             lineDirection="center"
                             className="md-cell md-cell--bottom"
