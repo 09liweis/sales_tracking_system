@@ -69,13 +69,15 @@ class Form extends React.Component {
         });
     }
     onDateChange(val) {
+        const dateArray = val.split('/');
+        const date = dateArray[2] + '-' + dateArray[0] + '-' + dateArray[1];
         const e = {
             target: {
                 name: 'date',
-                value: val
+                value: date
             }
         };
-        this.handleChange(val, e);
+        this.handleChange(date, e);
     }
     searchItem(e) {
         const name = e.target.value;
