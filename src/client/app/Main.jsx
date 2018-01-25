@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Home from './pages/Home.jsx';
-import Form from './pages/Form.jsx';
+import TransactionForm from './pages/TransactionForm.jsx';
 import Items from './pages/Items.jsx';
 
 const Main = () => (
@@ -10,8 +10,8 @@ const Main = () => (
     <Switch>
       <Route exact path='/' component={Home}/>
       <Route path='/transactions' component={Home}/>
-      <Route path='/transaction/add' component={Form}/>
-      <Route path='/transaction/edit/:id' render={(props) => <Form {...props}/>}/>
+      <Route path='/transaction/add' component={TransactionForm}/>
+      <Route path='/transaction/edit/:id' render={(props) => <TransactionForm {...props}/>}/>
       <Route path='/items' component={Items}/>
     </Switch>
   </main>

@@ -4,7 +4,7 @@ import $ from 'jquery';
 import { DatePicker, TextField, SelectionControl } from 'react-md';
 
 
-class Form extends React.Component {
+class TransactionForm extends React.Component {
 
     constructor(props) {
         super(props);
@@ -174,7 +174,7 @@ class Form extends React.Component {
             method: 'POST',
             data: c,
             success(res) {
-                _this.props.history.push('/');
+                _this.props.history.push('/transactions');
             }
         });
     }
@@ -314,4 +314,4 @@ class Form extends React.Component {
     }
 }
 
-export default Form;
+export default TransactionForm;

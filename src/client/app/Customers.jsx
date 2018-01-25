@@ -1,5 +1,11 @@
 import React from 'react';
-import $ from 'jquery';
+import {
+    DataTable,
+    TableHeader,
+    TableBody,
+    TableRow,
+    TableColumn,
+} from 'react-md';
 
 import Transaction from './components/Transaction.jsx';
 
@@ -43,27 +49,27 @@ class Customers extends React.Component {
             <div>
                 <h2>Today: {totalToday}</h2>
                 <h2>This Month: {totalMonth}</h2>
-                <table className="table is-fullwidth is-striped is-narrow">
-                    <thead>
-                        <tr>
-                            <th>日期</th>
-                            <th>买家所在地</th>
-                            <th>出售商品</th>
-                            <th>数量</th>
-                            <th>买家付款</th>
-                            <th>成本</th>
-                            <th>运费</th>
-                            <th>包装</th>
-                            <th>盈亏</th>
-                            <th>状态</th>
-                            <th>Remarks</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <DataTable plain>
+                    <TableHeader>
+                        <TableRow>
+                            <TableColumn>日期</TableColumn>
+                            <TableColumn>买家所在地</TableColumn>
+                            <TableColumn>出售商品</TableColumn>
+                            <TableColumn>数量</TableColumn>
+                            <TableColumn>买家付款</TableColumn>
+                            <TableColumn>成本</TableColumn>
+                            <TableColumn>运费</TableColumn>
+                            <TableColumn>包装</TableColumn>
+                            <TableColumn>盈亏</TableColumn>
+                            <TableColumn>状态</TableColumn>
+                            <TableColumn>Remarks</TableColumn>
+                            <TableColumn>Actions</TableColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
                     {list}
-                    </tbody>
-                </table>
+                    </TableBody>
+                </DataTable>
             </div>
         );
     }

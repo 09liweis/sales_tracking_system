@@ -1,6 +1,8 @@
 import React from 'react';
-import $ from 'jquery';
-
+import {
+    TableRow,
+    TableColumn,
+} from 'react-md';
 import { Link } from 'react-router-dom';
 
 class Transaction extends React.Component {
@@ -16,22 +18,22 @@ class Transaction extends React.Component {
             );   
         }
         return(
-            <tr key={c.id}>
-                <th>{c.date}</th>
-                <th>{c.location}</th>
-                <th>{items}</th>
-                <th>{c.quantity}</th>
-                <th>{c.payment}</th>
-                <th>{c.cost}</th>
-                <th>{c.shipping_fee}</th>
-                <th>{c.packaging}</th>
-                <th className={(c.profit_or_loss < 0) ? 'has-text-danger' : ''}>{c.profit_or_loss}</th>
-                <th>{c.status == '0' ? '已发货' : '已收货'}</th>
-                <th>{c.remarks}</th>
-                <th>
+            <TableRow key={c.id}>
+                <TableColumn>{c.date}</TableColumn>
+                <TableColumn>{c.location}</TableColumn>
+                <TableColumn>{items}</TableColumn>
+                <TableColumn>{c.quantity}</TableColumn>
+                <TableColumn>{c.payment}</TableColumn>
+                <TableColumn>{c.cost}</TableColumn>
+                <TableColumn>{c.shipping_fee}</TableColumn>
+                <TableColumn>{c.packaging}</TableColumn>
+                <TableColumn className={(c.profit_or_loss < 0) ? 'has-text-danger' : ''}>{c.profit_or_loss}</TableColumn>
+                <TableColumn>{c.status == '0' ? '已发货' : '已收货'}</TableColumn>
+                <TableColumn>{c.remarks}</TableColumn>
+                <TableColumn>
                     <Link to={`/transaction/edit/${c.id}`} className="button is-danger">Edit</Link>
-                </th>
-            </tr>
+                </TableColumn>
+            </TableRow>
         );
     }
 }
