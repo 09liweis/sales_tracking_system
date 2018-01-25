@@ -10,7 +10,7 @@ class Form extends React.Component {
         super(props);
         this.state = {
             customer: {
-                id: 0,
+                id: props.match.params.id || 0,
                 date: '',
                 location: '',
                 item_name: '',
@@ -36,9 +36,9 @@ class Form extends React.Component {
         this.calculate = this.calculate.bind(this);
         this.onDateChange = this.onDateChange.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.getTransaction = this.getTransaction.bind(this);
     }
     componentDidMount() {
-        console.log(this.props);
         const _this = this;
         $.ajax({
             url: '/controllers/items.php?action=getItems',
@@ -48,6 +48,10 @@ class Form extends React.Component {
                 });
             }
         });
+        const id = this.state.customer.id;
+        if (id != 0) {
+            this.getTransaction(id);
+        }
     }
     componentWillReceiveProps(nextProps) {
         const items = nextProps.customer.item_name;
@@ -58,6 +62,20 @@ class Form extends React.Component {
         }
         this.setState({
             customer: nextProps.customer,
+        });
+    }
+    getTransaction(id) {
+        const _this = this;
+        $.ajax({
+            url: '/controllers/customers.php?action=getCustomer',
+            data: {id: id},
+            method: 'GET',
+            success(res) {
+                console.log(res);
+                _this.setState({
+                    customer: res
+                });
+            }
         });
     }
     handleChange(v, e) {
@@ -152,7 +170,7 @@ class Form extends React.Component {
         c.item_name = JSON.stringify(c.item_name);
         const _this = this;
         $.ajax({
-            url: 'controllers/customers.php?action=upsertCustomer',
+            url: '/controllers/customers.php?action=upsertCustomer',
             method: 'POST',
             data: c,
             success(res) {
@@ -294,7 +312,6 @@ class Form extends React.Component {
             </form>
         );
     }
-
 }
 
 export default Form;

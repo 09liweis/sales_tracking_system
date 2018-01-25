@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-import ItemForm from './ItemForm.jsx';
+import ItemForm from '../components/ItemForm.jsx';
 
 class Items extends React.Component {
     constructor() {

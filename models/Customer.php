@@ -16,9 +16,9 @@ class Customer {
     public function customer($id) {
         $sql = 'SELECT * FROM customers WHERE id = :id';
         $pdostmt = $this->db->prepare($sql);
-        $pdostmt->execute();
         $pdostmt->bindValue(':id', $id, PDO::PARAM_INT);
-        $customer = $pdostmt->fetchOne(PDO::FETCH_ASSOC);
+        $pdostmt->execute();
+        $customer = $pdostmt->fetch(PDO::FETCH_ASSOC);
         return $customer;
     }
     public function upsertCustomer($customer) {

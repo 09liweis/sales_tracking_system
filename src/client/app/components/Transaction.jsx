@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
 
+import { Link } from 'react-router-dom';
+
 class Transaction extends React.Component {
     constructor(props) {
         super(props);
@@ -27,7 +29,7 @@ class Transaction extends React.Component {
                 <th>{c.status == '0' ? '已发货' : '已收货'}</th>
                 <th>{c.remarks}</th>
                 <th>
-                    <button className="button is-danger">Edit</button>
+                    <Link to={`/transaction/edit/${c.id}`} className="button is-danger">Edit</Link>
                 </th>
             </tr>
         );
