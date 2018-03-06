@@ -1,8 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-import { DatePicker, TextField, SelectionControl } from 'react-md';
-
+import { DatePicker, TextField, SelectionControl, Grid, Cell } from 'react-md';
 
 class TransactionForm extends React.Component {
 
@@ -73,7 +72,8 @@ class TransactionForm extends React.Component {
             success(res) {
                 console.log(res);
                 _this.setState({
-                    customer: res
+                    customer: res,
+                    salesItems: JSON.parse(res.item_name)
                 });
             }
         });
@@ -151,12 +151,13 @@ class TransactionForm extends React.Component {
         var total_sales = 0;
         var total_quantity = 0;
         this.state.salesItems.map((item) => {
-            total_cost += (item.cost * item.sales_quantity).toFixed(2);
-            total_sales += (item.retail * item.sales_quantity).toFixed(2);
-            total_quantity += parseInt(item.sales_quantity);
+            let quantity = parseInt(item.sales_quantity, 10);
+            total_cost += (parseFloat(item.cost) * quantity).toFixed(2);
+            total_sales += (parseFloat(item.retail) * quantity).toFixed(2);
+            total_quantity += quantity;
         });
-        customer.payment = total_sales.toFixed(2);
-        customer.cost = total_cost.toFixed(2);
+        customer.payment = parseFloat(total_sales).toFixed(2);
+        customer.cost = parseFloat(total_cost).toFixed(2);
         customer.quantity = total_quantity;
         this.setState({
             customer: customer
@@ -198,8 +199,8 @@ class TransactionForm extends React.Component {
         );
         return (
             <form className="box" autoComplete="off" onSubmit={this.handleSubmit}>
-                <div className="columns">
-                    <div className="column">
+                <Grid>
+                    <Cell size={6}>
                         <div className="Search">
                             <label>搜素商品</label>
                             <input className="input" type="text" onChange={this.searchItem} />
@@ -208,8 +209,8 @@ class TransactionForm extends React.Component {
                             </ul>
                         </div>
                         {salesItems}
-                    </div>
-                    <div className="column">
+                    </Cell>
+                    <Cell size={6}>
                         <div className="field">
                             <label className="label">Date</label>
                             <DatePicker
@@ -304,8 +305,8 @@ class TransactionForm extends React.Component {
                             lineDirection="center"
                             className="md-cell md-cell--bottom"
                         />
-                    </div>
-                </div>
+                    </Cell>
+                </Grid>
                 <div className="">
                     <button className="button is-primary">Submit</button>
                 </div>
