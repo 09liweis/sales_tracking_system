@@ -30,7 +30,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                <Link to="/transaction/add" className="button">Add</Link>
+                <Link to="/transaction/add">添加交易</Link>
                 <Customers customers={this.state.customers} />
             </div>
         );

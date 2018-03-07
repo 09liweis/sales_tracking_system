@@ -13,6 +13,15 @@ class Item {
         return $items;
     }
     
+    public function item($id) {
+        $sql = 'SELECT * FROM items WHERE id = :id';
+        $pdostmt = $this->db->prepare($sql);
+        $pdostmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $pdostmt->execute();
+        $item = $pdostmt->fetch(PDO::FETCH_ASSOC);
+        return $item;
+    }
+    
     public function upsertItem($item) {
         $id = $item['id'];
         $name = $item['name'];

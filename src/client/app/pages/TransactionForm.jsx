@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-import { DatePicker, TextField, SelectionControl, Grid, Cell } from 'react-md';
+import { DatePicker, TextField, SelectionControl, Grid, Cell, List, ListItem, Card } from 'react-md';
 
 class TransactionForm extends React.Component {
 
@@ -97,11 +97,10 @@ class TransactionForm extends React.Component {
         };
         this.handleChange(date, e);
     }
-    searchItem(e) {
-        const name = e.target.value;
+    searchItem(v, e) {
         var searchItems = [];
         this.state.items.map((item) => {
-            if (item.name.indexOf(name) != -1) {
+            if (item.name.indexOf(v) != -1) {
                 searchItems.push(item);
             }
         });
@@ -184,10 +183,10 @@ class TransactionForm extends React.Component {
         var profit_or_loss = (c.payment - c.cost - c.shipping_fee - c.packaging).toFixed(2);
         const _this = this;
         const options = this.state.searchItems.map((item) => 
-            <li key={item.id} onClick={_this.addItem.bind(_this, item)}>{item.name}</li>
+            <ListItem primaryText={item.name} key={item.id} onClick={_this.addItem.bind(_this, item)} />
         );
         const salesItems = this.state.salesItems.map((item) =>
-            <div key={item.id}>
+            <Card key={item.id}>
                 <h5>{item.name}</h5>
                 <button onClick={_this.removeSalesItem.bind(_this, item)}>Remove</button>
                 <p>Cost: {item.cost}</p>
@@ -195,20 +194,31 @@ class TransactionForm extends React.Component {
                 <input type="number" className="input" value={item.sales_quantity} onChange={_this.changeQuantity.bind(_this, item)}  />
                 <p>Total Cost: {parseFloat(item.cost).toFixed(2) * item.sales_quantity}</p>
                 <p>Total Retail: {parseFloat(item.retail).toFixed(2) * item.sales_quantity}</p>
-            </div>
+            </Card>
         );
         return (
             <form className="box" autoComplete="off" onSubmit={this.handleSubmit}>
                 <Grid>
                     <Cell size={6}>
-                        <div className="Search">
-                            <label>搜素商品</label>
-                            <input className="input" type="text" onChange={this.searchItem} />
-                            <ul className={this.state.hideItems ? 'is-hidden' : ''}>
-                            {options}
-                            </ul>
-                        </div>
-                        {salesItems}
+                        <Grid>
+                            <Cell size={6}>
+                                <div className="Search">
+                                    <TextField
+                                        id="search"
+                                        label="搜素商品"
+                                        onChange={this.searchItem}
+                                        lineDirection="center"
+                                        className="md-cell md-cell--bottom"
+                                    />
+                                    <List className={this.state.hideItems ? 'is-hidden' : ''}>
+                                    {options}
+                                    </List>
+                                </div>
+                            </Cell>
+                            <Cell size={6}>
+                                {salesItems}
+                            </Cell>
+                        </Grid>
                     </Cell>
                     <Cell size={6}>
                         <div className="field">
@@ -305,11 +315,9 @@ class TransactionForm extends React.Component {
                             lineDirection="center"
                             className="md-cell md-cell--bottom"
                         />
+                        <button className="button is-primary">Submit</button>
                     </Cell>
                 </Grid>
-                <div className="">
-                    <button className="button is-primary">Submit</button>
-                </div>
             </form>
         );
     }

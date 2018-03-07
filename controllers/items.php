@@ -12,6 +12,11 @@ if ($_GET['action'] == 'getItems') {
     echo json_encode($items);
 }
 
+if ($_GET['action'] == 'getItem') {
+    $item = $itemRepo->item($_GET['id']);
+    echo json_encode($item);
+}
+
 if ($_GET['action'] == 'upsertItem') {
     $item = $_POST;
     $itemRepo->upsertItem($item);
