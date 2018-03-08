@@ -24,7 +24,6 @@ class TransactionForm extends React.Component {
             },
             items: [],
             searchItems: [],
-            hideItems: true,
             salesItems: [],
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,7 +42,8 @@ class TransactionForm extends React.Component {
             url: '/controllers/items.php?action=getItems',
             success(res) {
                 _this.setState({
-                    items: res
+                    items: res,
+                    searchItems: res
                 });
             }
         });
@@ -106,7 +106,6 @@ class TransactionForm extends React.Component {
         });
         this.setState({
             searchItems: searchItems,
-            hideItems: false
         });
     }
     addItem(item) {
@@ -115,7 +114,6 @@ class TransactionForm extends React.Component {
         salesItems.push(item);
         this.setState({
             salesItems: salesItems,
-            hideItems: true
         });
     }
     removeSalesItem(item) {
@@ -210,7 +208,7 @@ class TransactionForm extends React.Component {
                                         lineDirection="center"
                                         className="md-cell md-cell--bottom"
                                     />
-                                    <List className={this.state.hideItems ? 'is-hidden' : ''}>
+                                    <List>
                                     {options}
                                     </List>
                                 </div>
