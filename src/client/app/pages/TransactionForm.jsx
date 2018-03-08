@@ -149,10 +149,11 @@ class TransactionForm extends React.Component {
         var total_quantity = 0;
         this.state.salesItems.map((item) => {
             let quantity = parseInt(item.sales_quantity, 10);
-            total_cost += (parseFloat(item.cost) * quantity).toFixed(2);
-            total_sales += (parseFloat(item.retail) * quantity).toFixed(2);
+            total_cost += (parseFloat(item.cost) * quantity);
+            total_sales += (parseFloat(item.retail) * quantity);
             total_quantity += quantity;
         });
+        console.log(total_cost);
         customer.payment = parseFloat(total_sales).toFixed(2);
         customer.cost = parseFloat(total_cost).toFixed(2);
         customer.quantity = total_quantity;
