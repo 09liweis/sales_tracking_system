@@ -52,5 +52,6 @@ class Item {
         $pdostmt->bindValue(':total_cost', $total_cost, PDO::PARAM_STR);
         $pdostmt->bindValue(':total_retail', $total_retail, PDO::PARAM_STR);
         $pdostmt->execute();
+        return $item;
     }
 }

@@ -19,9 +19,22 @@ if ($_GET['action'] == 'getItem') {
 
 if ($_GET['action'] == 'upsertItem') {
     $item = $_POST;
-    $itemRepo->upsertItem($item);
-    $result = array('msg' => 'success', 'code' => 200);
+    $item = $itemRepo->upsertItem($item);
+    $result = array('msg' => 'success', 'code' => 200, 'data' => $item);
     echo json_encode($result);
+}
+
+if ($_GET['action'] == 'updateItems') {
+    $items = $itemRepo->items();
+    foreach($items as $item) {
+        $quantity = $item['quantity'];
+        $cost = $item['cost'];
+        $retail = $item['retail'] + 0.5;
+        $item['retail'] = $retail;
+        $item['total_cost'] = $cost * $quantity;
+        $item['total_retail'] = $retail * $quantity;
+        $itemRepo->upsertItem($item);
+    }
 }
 
 if ($_GET['action'] == 'importItems') {

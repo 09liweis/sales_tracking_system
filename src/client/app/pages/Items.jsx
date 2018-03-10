@@ -31,7 +31,6 @@ class Items extends React.Component {
     }
     render() {
         const items = this.state.items;
-        const _this = this;
         const list = items.map((item) => 
             <TableRow key={item.id}>
                 <TableColumn>{item.name}</TableColumn>

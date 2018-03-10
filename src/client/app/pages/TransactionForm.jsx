@@ -153,7 +153,6 @@ class TransactionForm extends React.Component {
             total_sales += (parseFloat(item.retail) * quantity);
             total_quantity += quantity;
         });
-        console.log(total_cost);
         customer.payment = parseFloat(total_sales).toFixed(2);
         customer.cost = parseFloat(total_cost).toFixed(2);
         customer.quantity = total_quantity;
