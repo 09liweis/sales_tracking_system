@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-md';
 
 import Customers from '../Customers.jsx';
 import $ from 'jquery';
@@ -30,7 +31,7 @@ class Home extends React.Component {
     render() {
         return (
             <div>
-                <Link to="/transaction/add">添加交易</Link>
+                <Button flat primary swapTheming><Link to="/transaction/add">添加交易</Link></Button>
                 <Customers customers={this.state.customers} />
             </div>
         );

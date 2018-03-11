@@ -27,12 +27,6 @@ if ($_GET['action'] == 'upsertItem') {
 if ($_GET['action'] == 'updateItems') {
     $items = $itemRepo->items();
     foreach($items as $item) {
-        $quantity = $item['quantity'];
-        $cost = $item['cost'];
-        $retail = $item['retail'] + 0.5;
-        $item['retail'] = $retail;
-        $item['total_cost'] = $cost * $quantity;
-        $item['total_retail'] = $retail * $quantity;
         $itemRepo->upsertItem($item);
     }
 }

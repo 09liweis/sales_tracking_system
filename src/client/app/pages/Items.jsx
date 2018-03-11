@@ -2,6 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 
 import {
+    TextField,
+    Button,
     DataTable,
     TableHeader,
     TableBody,
@@ -16,6 +18,7 @@ class Items extends React.Component {
         super();
         this.state = {
             items: [],
+            search: ''
         };
     }
     componentDidMount() {
@@ -29,23 +32,40 @@ class Items extends React.Component {
             }
         });
     }
+    searchItem(v, e) {
+        this.setState({
+            search: v
+        });
+    }
     render() {
-        const items = this.state.items;
+        const {items, search} = this.state;
         const list = items.map((item) => 
-            <TableRow key={item.id}>
-                <TableColumn>{item.name}</TableColumn>
-                <TableColumn>{item.description}</TableColumn>
-                <TableColumn>{item.cost}</TableColumn>
-                <TableColumn>{item.retail}</TableColumn>
-                <TableColumn>{item.quantity}</TableColumn>
-                <TableColumn>{item.total_cost}</TableColumn>
-                <TableColumn>{item.total_retail}</TableColumn>
-                <TableColumn><Link to={`/item/${item.id}/edit`}>Edit</Link></TableColumn>
-            </TableRow>
+            {
+                if (item.name.indexOf(search) != -1) {
+                    return (<TableRow key={item.id}>
+                        <TableColumn>{item.name}</TableColumn>
+                        <TableColumn>{item.description}</TableColumn>
+                        <TableColumn>{item.cost}</TableColumn>
+                        <TableColumn>{item.retail}</TableColumn>
+                        <TableColumn>{item.quantity}</TableColumn>
+                        <TableColumn>{item.total_cost}</TableColumn>
+                        <TableColumn>{item.total_retail}</TableColumn>
+                        <TableColumn><Button flat secondary swapTheming><Link to={`/item/${item.id}/edit`}>Edit</Link></Button></TableColumn>
+                    </TableRow>);
+                }
+            }
         );
         return (
             <div>
-            <Link to="/item/add">添加商品</Link>
+            <Button flat primary swapTheming><Link to="/item/add">添加商品新品种</Link></Button>
+            
+            <TextField
+                id="floating-center-title"
+                label="搜索商品"
+                lineDirection="center"
+                className="md-cell md-cell--bottom"
+                onChange={this.searchItem.bind(this)}
+            />
             <DataTable plain>
                 <TableHeader>
                     <TableRow>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { Button } from 'react-md';
+
 class Header extends React.Component {
 
     constructor(props) {
@@ -10,9 +12,8 @@ class Header extends React.Component {
     render() {
         return (
             <nav className="navbar is-light" role="navigation" aria-label="main navigation">
-                <Link to='/'>交易管理</Link>
-                <br/>
-                <Link to='/items'>商品管理</Link>
+                <Button flat primary swapTheming><Link to='/'>交易管理</Link></Button>
+                <Button flat primary swapTheming><Link to='/items'>商品管理</Link></Button>
             </nav>
         );
     }
