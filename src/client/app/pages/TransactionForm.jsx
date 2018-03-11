@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-import { DatePicker, TextField, SelectionControl, Grid, Cell, List, ListItem, Card } from 'react-md';
+import { DatePicker, TextField, SelectField, Grid, Cell, List, ListItem, Card } from 'react-md';
 
 import {parseDate} from '../utility.js';
 
@@ -101,6 +101,13 @@ class TransactionForm extends React.Component {
         };
         this.handleChange(date, e);
     }
+    handleStatusChange(v) {
+        let customer = this.state.customer;
+        customer.status = v;
+        this.setState({
+            customer: customer
+        });
+    } 
     searchItem(v, e) {
         var searchItems = [];
         this.state.items.map((item) => {
@@ -188,14 +195,14 @@ class TransactionForm extends React.Component {
             <ListItem primaryText={item.name} key={item.id} onClick={_this.addItem.bind(_this, item)} />
         );
         const salesItems = this.state.salesItems.map((item) =>
-            <Card key={item.id}>
+            <Card key={item.id} style={{padding: '10px', marginBottom: '10px'}}>
                 <h5>{item.name}</h5>
-                <button onClick={_this.removeSalesItem.bind(_this, item)}>Remove</button>
-                <p>Cost: {item.cost}</p>
-                <p>Retail: {item.retail}</p>
-                <input type="number" className="input" value={item.sales_quantity} onChange={_this.changeQuantity.bind(_this, item)}  />
-                <p>Total Cost: {parseFloat(item.cost).toFixed(2) * item.sales_quantity}</p>
-                <p>Total Retail: {parseFloat(item.retail).toFixed(2) * item.sales_quantity}</p>
+                <button onClick={_this.removeSalesItem.bind(_this, item)}>移除次商品</button>
+                <p>成本价: {item.cost}</p>
+                <p>零售价: {item.retail}</p>
+                增减数量: <input type="number" className="input" value={item.sales_quantity} onChange={_this.changeQuantity.bind(_this, item)}  />
+                <p>总成本价: {parseFloat(item.cost).toFixed(2) * item.sales_quantity}</p>
+                <p>总零售价: {parseFloat(item.retail).toFixed(2) * item.sales_quantity}</p>
             </Card>
         );
         return (
@@ -248,7 +255,7 @@ class TransactionForm extends React.Component {
                         />
                         <TextField
                             id="payment"
-                            label="Payment"
+                            label="总(付款)零售"
                             name="payment"
                             value={c.payment}
                             onChange={this.handleChange}
@@ -257,7 +264,7 @@ class TransactionForm extends React.Component {
                         />
                         <TextField
                             id="cost"
-                            label="Cost"
+                            label="总成本"
                             name="cost"
                             value={c.cost}
                             onChange={this.handleChange}
@@ -300,13 +307,15 @@ class TransactionForm extends React.Component {
                             lineDirection="center"
                             className="md-cell md-cell--bottom"
                         />
-                        <SelectionControl
+                        <SelectField
                             id="status"
-                            type="switch"
+                            placeholder="Placeholder"
+                            className="md-cell"
                             label="已发货"
                             name="status"
                             value={c.status}
-                            onChange={this.handleChange}
+                            onChange={this.handleStatusChange.bind(this)}
+                            menuItems={[{value: 0, label: '未发货'}, {value: 1, label: '已发货'}, {value: 2, label: '已收货'}]}
                         />
                         <TextField
                             id="remarks"

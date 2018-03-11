@@ -18,6 +18,18 @@ class Transaction extends React.Component {
                 <p key={item.id}>{item.name} X {item.sales_quantity}</p>
             );   
         }
+        var status = '未发货';
+        switch (c.status) {
+            case '0':
+                status = '未发货';
+                break;
+            case '1':
+                status = '已发货';
+                break;
+            case '2':
+                status = '已收货';
+                break;
+        }
         return(
             <TableRow key={c.id}>
                 <TableColumn>{c.date}</TableColumn>
@@ -29,7 +41,7 @@ class Transaction extends React.Component {
                 <TableColumn>{c.shipping_fee}</TableColumn>
                 <TableColumn>{c.packaging}</TableColumn>
                 <TableColumn className={(c.profit_or_loss < 0) ? 'has-text-danger' : ''}>{c.profit_or_loss}</TableColumn>
-                <TableColumn>{c.status == '0' ? '已发货' : '已收货'}</TableColumn>
+                <TableColumn>{status}</TableColumn>
                 <TableColumn>{c.remarks}</TableColumn>
                 <TableColumn>
                     <Button flat secondary swapTheming><Link to={`/transaction/edit/${c.id}`} className="button is-danger">修改交易</Link></Button>
