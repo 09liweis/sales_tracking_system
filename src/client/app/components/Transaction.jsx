@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    Button,
     TableRow,
     TableColumn,
 } from 'react-md';
@@ -31,7 +32,7 @@ class Transaction extends React.Component {
                 <TableColumn>{c.status == '0' ? '已发货' : '已收货'}</TableColumn>
                 <TableColumn>{c.remarks}</TableColumn>
                 <TableColumn>
-                    <Link to={`/transaction/edit/${c.id}`} className="button is-danger">Edit</Link>
+                    <Button flat secondary swapTheming><Link to={`/transaction/edit/${c.id}`} className="button is-danger">修改交易</Link></Button>
                 </TableColumn>
             </TableRow>
         );

@@ -5,9 +5,25 @@ class Customer {
         $this->db = $db;
     }
     
-    public function customers() {
-        $sql = 'SELECT * FROM customers ORDER BY date DESC';
+    public function customers($options) {
+        $startDate = $options['start'];
+        $endDate = $options['end'];
+        $sql = 'SELECT * FROM customers WHERE 1';
+        if ($startDate) {
+            $sql .= ' AND date >= :start';
+        }
+        if ($endDate) {
+            $sql .= ' AND date <= :end';
+        }
+        $sql .= ' ORDER BY date DESC';
+
         $pdostmt = $this->db->prepare($sql);
+        if ($startDate) {
+            $pdostmt->bindValue(':start', $startDate, PDO::PARAM_STR);   
+        }
+        if ($endDate) {
+            $pdostmt->bindValue(':end', $endDate, PDO::PARAM_STR);
+        }
         $pdostmt->execute();
         $customers = $pdostmt->fetchAll(PDO::FETCH_ASSOC);
         return $customers;

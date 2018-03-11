@@ -10,7 +10,8 @@ $customerRepo = new Customer(Database::dbConnect());
 header('Content-Type: application/json');
 
 if ($_GET['action'] == 'getCustomers') {
-    $customers = $customerRepo->customers();
+    $options = $_GET['date'];
+    $customers = $customerRepo->customers($options);
     echo json_encode($customers);
 }
 

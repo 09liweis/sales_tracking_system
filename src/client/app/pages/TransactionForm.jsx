@@ -3,6 +3,8 @@ import $ from 'jquery';
 
 import { DatePicker, TextField, SelectionControl, Grid, Cell, List, ListItem, Card } from 'react-md';
 
+import {parseDate} from '../utility.js';
+
 class TransactionForm extends React.Component {
 
     constructor(props) {
@@ -87,8 +89,8 @@ class TransactionForm extends React.Component {
         });
     }
     onDateChange(val) {
-        const dateArray = val.split('/');
-        const date = dateArray[2] + '-' + dateArray[0] + '-' + dateArray[1];
+        console.log(val);
+        const date = parseDate(val);
         const e = {
             target: {
                 name: 'date',
@@ -223,7 +225,7 @@ class TransactionForm extends React.Component {
                             <label className="label">Date</label>
                             <DatePicker
                                 id="appointment-date-portrait"
-                                label="Portrait mode"
+                                label="交易日期"
                                 className="md-cell"
                                 displayMode="portrait"
                                 value={c.date}

@@ -47,8 +47,8 @@ class Customers extends React.Component {
         );
         return (
             <div>
-                <h2>Today: {totalToday}</h2>
-                <h2>This Month: {totalMonth}</h2>
+                <h2>今日交易额: {totalToday.toFixed(2)}</h2>
+                <h2>今月交易额: {totalMonth.toFixed(2)}</h2>
                 <DataTable plain>
                     <TableHeader>
                         <TableRow>
