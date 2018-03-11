@@ -72,7 +72,9 @@ class TransactionForm extends React.Component {
             data: {id: id},
             method: 'GET',
             success(res) {
-                console.log(res);
+                if (res.date == '0000-00-00') {
+                    res.date = '';
+                }
                 _this.setState({
                     customer: res,
                     salesItems: JSON.parse(res.item_name)
