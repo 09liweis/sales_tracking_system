@@ -24,6 +24,12 @@ if ($_GET['action'] == 'upsertItem') {
     echo json_encode($result);
 }
 
+if ($_GET['action'] == 'deleteItem') {
+    $id = $_POST['id'];
+    $itemRepo->delete($id);
+    echo json_encode(200);
+}
+
 if ($_GET['action'] == 'updateItems') {
     $items = $itemRepo->items();
     foreach($items as $item) {

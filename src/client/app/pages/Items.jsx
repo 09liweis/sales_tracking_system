@@ -20,8 +20,12 @@ class Items extends React.Component {
             items: [],
             search: ''
         };
+        this.deleteItem = this.deleteItem.bind(this);
     }
     componentDidMount() {
+        this.getItems();
+    }
+    getItems() {
         const _this = this;
         $.ajax({
             url: '/controllers/items.php?action=getItems',
@@ -37,8 +41,20 @@ class Items extends React.Component {
             search: v
         });
     }
+    deleteItem(id) {
+        const _this = this;
+        $.ajax({
+            url: '/controllers/items.php?action=deleteItem',
+            method: 'POST',
+            data: {id: id},
+            success(res) {
+                _this.getItems();
+            }
+        });
+    }
     render() {
         const {items, search} = this.state;
+        const _this = this;
         const list = items.map((item) => 
             {
                 if (item.name.indexOf(search) != -1) {
@@ -50,7 +66,10 @@ class Items extends React.Component {
                         <TableColumn>{item.quantity}</TableColumn>
                         <TableColumn>{item.total_cost}</TableColumn>
                         <TableColumn>{item.total_retail}</TableColumn>
-                        <TableColumn><Button flat secondary swapTheming><Link to={`/item/${item.id}/edit`}>Edit</Link></Button></TableColumn>
+                        <TableColumn>
+                            <Button flat secondary swapTheming><Link to={`/item/${item.id}/edit`}>Edit</Link></Button>
+                            <Button flat secondary swapTheming onClick={_this.deleteItem.bind(_this, item.id)}>删除商品</Button>
+                        </TableColumn>
                     </TableRow>);
                 }
             }

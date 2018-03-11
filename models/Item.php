@@ -6,7 +6,7 @@ class Item {
     }
     
     public function items() {
-        $sql = 'SELECT * FROM items';
+        $sql = 'SELECT * FROM items ORDER BY id DESC';
         $pdostmt = $this->db->prepare($sql);
         $pdostmt->execute();
         $items = $pdostmt->fetchAll(PDO::FETCH_ASSOC);
@@ -60,5 +60,12 @@ class Item {
         $pdostmt->bindValue(':created_at', $created_at, PDO::PARAM_STR);
         $pdostmt->execute();
         return $item;
+    }
+    
+    public function delete($id) {
+        $sql = 'DELETE FROM items WHERE id = :id';
+        $pdostmt = $this->db->prepare($sql);
+        $pdostmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $pdostmt->execute();
     }
 }
