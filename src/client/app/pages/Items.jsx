@@ -76,8 +76,6 @@ class Items extends React.Component {
         );
         return (
             <div>
-            <Button flat primary swapTheming><Link to="/item/add">添加商品新品种</Link></Button>
-            
             <TextField
                 id="floating-center-title"
                 label="搜索商品"

@@ -66,8 +66,6 @@ class Home extends React.Component {
         });
         return (
             <div>
-                <Button flat primary swapTheming><Link to="/transaction/add">添加交易</Link></Button>
-                
                 <Grid>
                     <Cell size={2}>
                     <DatePicker
