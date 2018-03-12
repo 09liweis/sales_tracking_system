@@ -43,7 +43,7 @@ class Customers extends React.Component {
             }
         });
         const list = customers.map((c, i) =>
-            <Transaction key={c.id} c={c} />
+            <Transaction key={c.id} c={c} removeTransaction={this.props.removeTransaction.bind(this)} />
         );
         return (
             <div>

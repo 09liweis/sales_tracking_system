@@ -27,6 +27,12 @@ if ($_GET['action'] == 'upsertCustomer') {
     echo json_encode($result);
 }
 
+if ($_GET['action'] == 'delete') {
+    $id = $_POST['id'];
+    $customerRepo->delete($id);
+    echo json_encode(200);
+}
+
 if ($_GET['action'] == 'importCustomers') {
     $handle = fopen('../files/sales.txt', 'r');
     while (($line = fgets($handle)) !== false) {

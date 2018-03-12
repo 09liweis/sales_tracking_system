@@ -83,4 +83,11 @@ class Customer {
         $pdostmt->bindValue(':remarks', $remarks, PDO::PARAM_STR);
         $pdostmt->execute();
     }
+    
+    public function delete($id) {
+        $sql = 'DELETE FROM customers WHERE id = :id';
+        $pdostmt = $this->db->prepare($sql);
+        $pdostmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $pdostmt->execute();
+    }
 }

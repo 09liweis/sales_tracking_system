@@ -18,6 +18,7 @@ class Home extends React.Component {
             }
         };
         this.getCustomers = this.getCustomers.bind(this);
+        this.removeTransaction = this.removeTransaction.bind(this);
     }
     componentDidMount() {
         this.getCustomers();
@@ -47,6 +48,18 @@ class Home extends React.Component {
                 _this.setState({
                     customers: res
                 });
+            }
+        });
+    }
+    removeTransaction(id) {
+        console.log(id);
+        const _this = this;
+        $.ajax({
+            url: '/controllers/customers.php?action=delete',
+            data: {id: id},
+            method: 'POST',
+            success(res) {
+                _this.getCustomers();
             }
         });
     }
@@ -109,7 +122,7 @@ class Home extends React.Component {
                     </Cell>
                 </Grid>
                 
-                <Customers customers={customers} />
+                <Customers customers={customers} removeTransaction={this.removeTransaction} />
             </div>
         );
     }
