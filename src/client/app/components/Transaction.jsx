@@ -37,6 +37,7 @@ class Transaction extends React.Component {
                 <TableColumn>{items}</TableColumn>
                 <TableColumn>{c.quantity}</TableColumn>
                 <TableColumn>{c.payment}</TableColumn>
+                <TableColumn>{c.other_fee}</TableColumn>
                 <TableColumn>{c.cost}</TableColumn>
                 <TableColumn>{c.shipping_fee}</TableColumn>
                 <TableColumn>{c.packaging}</TableColumn>

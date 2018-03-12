@@ -44,20 +44,22 @@ class Customer {
         $item_name = $customer['item_name'];
         $quantity = $customer['quantity'];
         $payment = $customer['payment'];
+        $other_fee = $customer['other_fee'];
         $cost = $customer['cost'];
         $shipping_fee = $customer['shipping_fee'];
         $packaging = $customer['packaging'];
         $profit_or_loss = $customer['profit_or_loss'];
         $status = $customer['status'];
         $remarks = $customer['remarks'];
-        $sql = 'INSERT INTO customers (id, date, location, item_name, quantity, payment, cost, shipping_fee, packaging, profit_or_loss, status, remarks)
-                VALUES (:id, :date, :location, :item_name, :quantity, :payment, :cost, :shipping_fee, :packaging, :profit_or_loss, :status, :remarks)
+        $sql = 'INSERT INTO customers (id, date, location, item_name, quantity, payment, other_fee, cost, shipping_fee, packaging, profit_or_loss, status, remarks)
+                VALUES (:id, :date, :location, :item_name, :quantity, :payment, :other_fee, :cost, :shipping_fee, :packaging, :profit_or_loss, :status, :remarks)
                 ON DUPLICATE KEY UPDATE
                 date = VALUES(`date`),
                 location = VALUES(`location`),
                 item_name = VALUES(`item_name`),
                 quantity = VALUES(`quantity`),
                 payment = VALUES(`payment`),
+                other_fee = VALUES(`other_fee`),
                 cost = VALUES(`cost`),
                 shipping_fee = VALUES(`shipping_fee`),
                 packaging = VALUES(`packaging`),
@@ -72,6 +74,7 @@ class Customer {
         $pdostmt->bindValue(':item_name', $item_name, PDO::PARAM_STR);
         $pdostmt->bindValue(':quantity', $quantity, PDO::PARAM_STR);
         $pdostmt->bindValue(':payment', $payment, PDO::PARAM_STR);
+        $pdostmt->bindValue(':other_fee', $other_fee, PDO::PARAM_STR);
         $pdostmt->bindValue(':cost', $cost, PDO::PARAM_STR);
         $pdostmt->bindValue(':shipping_fee', $shipping_fee, PDO::PARAM_STR);
         $pdostmt->bindValue(':packaging', $packaging, PDO::PARAM_STR);

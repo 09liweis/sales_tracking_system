@@ -17,6 +17,7 @@ class TransactionForm extends React.Component {
                 item_name: '',
                 quantity: '',
                 payment: '',
+                other_fee: '',
                 cost: '',
                 shipping_fee: '',
                 packaging: '',
@@ -189,7 +190,8 @@ class TransactionForm extends React.Component {
     }
     render() {
         const c = this.state.customer;
-        var profit_or_loss = (c.payment - c.cost - c.shipping_fee - c.packaging).toFixed(2);
+        const total_payment = parseFloat(c.payment) + parseFloat(c.other_fee)
+        var profit_or_loss = (total_payment - c.cost - c.shipping_fee - c.packaging).toFixed(2);
         const _this = this;
         const options = this.state.searchItems.map((item) => 
             <ListItem primaryText={item.name} key={item.id} onClick={_this.addItem.bind(_this, item)} />
@@ -258,6 +260,15 @@ class TransactionForm extends React.Component {
                             label="总(付款)零售"
                             name="payment"
                             value={c.payment}
+                            onChange={this.handleChange}
+                            lineDirection="center"
+                            className="md-cell md-cell--bottom"
+                        />
+                        <TextField
+                            id="other_fee"
+                            label="其他费用"
+                            name="other_fee"
+                            value={c.other_fee}
                             onChange={this.handleChange}
                             lineDirection="center"
                             className="md-cell md-cell--bottom"

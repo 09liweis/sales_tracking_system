@@ -57,6 +57,7 @@ class Customers extends React.Component {
                             <TableColumn>出售商品</TableColumn>
                             <TableColumn>数量</TableColumn>
                             <TableColumn>买家付款</TableColumn>
+                            <TableColumn>其他费用</TableColumn>
                             <TableColumn>成本</TableColumn>
                             <TableColumn>运费</TableColumn>
                             <TableColumn>包装</TableColumn>
