@@ -232,6 +232,7 @@ class TransactionForm extends React.Component {
                         </Grid>
                     </Cell>
                     <Cell size={6}>
+                        {/*
                         <div className="field">
                             <label className="label">Date</label>
                             <DatePicker
@@ -246,6 +247,16 @@ class TransactionForm extends React.Component {
                                 day: '2-digit',}}
                             />
                         </div>
+                         */}
+                        <TextField
+                            id="date"
+                            label="交易日期(格式: yyyy-mm-dd)"
+                            name="date"
+                            value={c.date}
+                            onChange={this.handleChange}
+                            lineDirection="center"
+                            className="md-cell md-cell--bottom"
+                        />
                         <TextField
                             id="quantity"
                             label="数量"
