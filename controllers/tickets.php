@@ -14,7 +14,7 @@ switch ($action) {
         $tickets = $ticketRepo->tickets();
         echo json_encode($tickets);
         break;
-    case 'updateTicket':
+    case 'upsertTicket':
         $ticket = $ticketRepo->updateTicket($_POST);
         echo json_encode($ticket);
     default:
