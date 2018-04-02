@@ -5,6 +5,7 @@ import Home from './pages/Home.jsx';
 import TransactionForm from './pages/TransactionForm.jsx';
 import Items from './pages/Items.jsx';
 import ItemForm from './pages/ItemForm.jsx';
+import TodoList from './pages/TodoList.jsx';
 
 const Main = () => (
   <main className="container">
@@ -16,6 +17,7 @@ const Main = () => (
       <Route path='/items' component={Items}/>
       <Route path='/item/add' component={ItemForm}/>
       <Route path='/item/:id/edit' render={(props) => <ItemForm {...props}/>}/>
+      <Route path='/todo' render={(props) => <TodoList {...props} />}/>
     </Switch>
   </main>
 );

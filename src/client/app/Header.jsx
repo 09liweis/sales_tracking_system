@@ -46,6 +46,7 @@ class Header extends React.Component {
                     <Link to='/transaction/add' key={2}><ListItem primaryText="添加商品" /></Link>,
                     <Link to='/items' key={3}><ListItem primaryText="商品管理" /></Link>,
                     <Link to='/item/add' key={4}><ListItem primaryText="添加新商品品种" /></Link>,
+                    <Link to='/todo' key={5}><ListItem primaryText="反馈与修复" /></Link>
                 ]}
                 header={(
                 <Toolbar
