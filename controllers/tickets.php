@@ -3,7 +3,7 @@
 require '../models/Database.php';
 require '../models/Ticket.php';
 
-$ticketRepo = new Item(Database::dbConnect());
+$ticketRepo = new Ticket(Database::dbConnect());
 
 header('Content-Type: application/json');
 
@@ -14,8 +14,8 @@ switch ($action) {
         $tickets = $ticketRepo->tickets();
         echo json_encode($tickets);
         break;
-    case 'upsertTicket':
-        $ticket = $ticketRepo->updateTicket($_POST);
+    case 'upsert':
+        $ticket = $ticketRepo->upsert($_POST);
         echo json_encode($ticket);
     default:
         // code...

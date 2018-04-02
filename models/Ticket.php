@@ -32,13 +32,13 @@ class Ticket {
         $description = $ticket['description'];
         $status = $ticket['status'];
         $created_at = $ticket['created_at'];
-        $sql = 'INSERT INTO items (id, name, description, status, created_at)
+        $sql = 'INSERT INTO tickets (id, name, description, status, created_at)
                 VALUES (:id, :name, :description, :status, :created_at)
                 ON DUPLICATE KEY UPDATE
                 name = VALUES(`name`),
                 description = VALUES(`description`),
                 status = VALUES(`status`),
-                created_at = VALUES(`created_at`),
+                created_at = VALUES(`created_at`)
                 ';
         $pdostmt = $this->db->prepare($sql);
         $pdostmt->bindValue(':id', $id, PDO::PARAM_INT);
