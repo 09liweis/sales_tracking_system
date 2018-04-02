@@ -176,8 +176,9 @@ class TransactionForm extends React.Component {
         e.preventDefault();
         var c = this.state.customer;
         c.item_name = this.state.salesItems;
-        c.profit_or_loss = c.payment - c.cost - c.shipping_fee - c.packaging;
         c.item_name = JSON.stringify(c.item_name);
+        const total_payment = parseFloat(c.payment) + parseFloat(c.other_fee);
+        c.profit_or_loss = (total_payment - c.cost - c.shipping_fee - c.packaging).toFixed(2);
         const _this = this;
         $.ajax({
             url: '/controllers/customers.php?action=upsertCustomer',
@@ -190,7 +191,7 @@ class TransactionForm extends React.Component {
     }
     render() {
         const c = this.state.customer;
-        const total_payment = parseFloat(c.payment) + parseFloat(c.other_fee)
+        const total_payment = parseFloat(c.payment) + parseFloat(c.other_fee);
         var profit_or_loss = (total_payment - c.cost - c.shipping_fee - c.packaging).toFixed(2);
         const _this = this;
         const options = this.state.searchItems.map((item) => 
