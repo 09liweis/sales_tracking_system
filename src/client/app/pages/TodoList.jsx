@@ -84,7 +84,10 @@ class TodoList extends React.Component {
             return (
                 <Card key={t.id} className="ticket" onDrag={this.handleDrag.bind(this)}>
                     <CardTitle title={t.name} subtitle={t.status} />
-                    <CardText><TextField id={'ticket' + idx} label="Description" name="description" rows={2} value={t.description} onChange={this.handleChange.bind(this, idx)} /></CardText>
+                    <CardText>
+                        <TextField id={'ticket' + idx} label="Description" name="description" rows={2} value={t.description} onChange={this.handleChange.bind(this, idx)} />
+                        <Button flat secondary swapTheming onClick={this.handleSubmit.bind(this, t)}>Update</Button>
+                    </CardText>
                 </Card>
             );
         });
