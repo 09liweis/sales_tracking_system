@@ -33,13 +33,18 @@ class TodoList extends React.Component {
             }
         });
     }
-    handleChange(idx, v, e) {
-        let ticket = this.state.ticket;
-        const p = e.target.name;
-        ticket[p] = v;
-        this.setState({
-            ticket: ticket
-        });
+    handleChange(v, e, idx) {
+        if (typeof idx != 'undefined') {
+            console.log(idx);
+        } else {
+            console.log('new');
+            let ticket = this.state.ticket;
+            const p = e.target.name;
+            ticket[p] = v;
+            this.setState({
+                ticket: ticket
+            });
+        }
     }
     handleDrag(e) {
         console.log(e);
@@ -84,10 +89,10 @@ class TodoList extends React.Component {
                         {tickets}
                         <Card className="ticket">
                             <CardTitle title="" subtitle="">
-                                <TextField id="title" label="New Ticket Title" name="name" onChange={this.handleChange} />
+                                <TextField id="title" label="New Ticket Title" name="name" value={newTicket.name} onChange={this.handleChange} />
                             </CardTitle>
                             <CardText>
-                                <TextField id="description" label="description" name="description" rows={2} onChange={this.handleChange} />
+                                <TextField id="description" label="description" name="description" value={newTicket.description} rows={2} onChange={this.handleChange} />
                             </CardText>
                             <Button flat secondary swapTheming onClick={this.handleSubmit.bind(this, newTicket)}>Create</Button>
                         </Card>
