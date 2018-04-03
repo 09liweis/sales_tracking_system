@@ -3,8 +3,6 @@ import $ from 'jquery';
 
 import {TextField,Button,Grid,Cell,Card, CardTitle, CardText} from 'react-md';
 
-import { Link } from 'react-router-dom';
-
 class TodoList extends React.Component {
     constructor() {
         super();
@@ -21,6 +19,9 @@ class TodoList extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
     componentDidMount() {
+        this.getTickets();
+    }
+    getTickets() {
         const _this= this;
         $.ajax({
             url: '/controllers/tickets.php?action=getAll',
@@ -49,12 +50,15 @@ class TodoList extends React.Component {
             success(res) {
                 if (res) {
                     _this.setState({
-                        id: 0,
-                        name: '',
-                        description: '',
-                        status: 'pending',
-                        category: 'feature'
+                        ticket: {
+                            id: 0,
+                            name: '',
+                            description: '',
+                            status: 'pending',
+                            category: 'feature'
+                        }
                     });
+                    _this.getTickets();
                 }
             }
         });
@@ -71,7 +75,7 @@ class TodoList extends React.Component {
         });
         return (
             <div style={{maxWidth: '768px', margin: 'auto',width: '100%'}}>
-                <h1>Todo List</h1>
+                <h1>反馈与修复</h1>
                 <Grid>
                     <Cell size={6}>
                         {tickets}
