@@ -35,9 +35,16 @@ class TodoList extends React.Component {
     }
     handleChange(v, e, idx) {
         if (typeof idx != 'undefined') {
-            console.log(idx);
+            const i = v;
+            const ev = idx;
+            const value = e;
+            let todos = this.state.todos;
+            const p = ev.target.name;
+            todos[i][p] = value;
+            this.setState({
+                todos: todos
+            });
         } else {
-            console.log('new');
             let ticket = this.state.ticket;
             const p = e.target.name;
             ticket[p] = v;
