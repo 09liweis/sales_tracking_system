@@ -33,7 +33,7 @@ class TodoList extends React.Component {
             }
         });
     }
-    handleChange(v, e) {
+    handleChange(idx, v, e) {
         let ticket = this.state.ticket;
         const p = e.target.name;
         ticket[p] = v;
@@ -68,11 +68,11 @@ class TodoList extends React.Component {
     }
     render() {
         const newTicket = this.state.ticket;
-        const tickets = this.state.todos.map((t) => {
+        const tickets = this.state.todos.map((t, idx) => {
             return (
                 <Card key={t.id} className="ticket" onDrag={this.handleDrag.bind(this)}>
                     <CardTitle title={t.name} subtitle={t.status} />
-                    <CardText>{t.description}</CardText>
+                    <CardText><TextField id={'ticket' + idx} label="Description" name="description" rows={2} value={t.description} onChange={this.handleChange.bind(this, idx)} /></CardText>
                 </Card>
             );
         });
