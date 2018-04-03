@@ -41,6 +41,9 @@ class TodoList extends React.Component {
             ticket: ticket
         });
     }
+    handleDrag(e) {
+        console.log(e);
+    }
     handleSubmit(ticket) {
         const _this = this;
         $.ajax({
@@ -67,7 +70,7 @@ class TodoList extends React.Component {
         const newTicket = this.state.ticket;
         const tickets = this.state.todos.map((t) => {
             return (
-                <Card className="ticket">
+                <Card key={t.id} className="ticket" onDrag={this.handleDrag.bind(this)}>
                     <CardTitle title={t.name} subtitle={t.status} />
                     <CardText>{t.description}</CardText>
                 </Card>
