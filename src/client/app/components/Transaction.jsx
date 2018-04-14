@@ -30,12 +30,14 @@ class Transaction extends React.Component {
                 status = '已收货';
                 break;
         }
+        const total = parseFloat(c.payment) + parseFloat(c.other_fee);
         return(
             <TableRow key={c.id}>
                 <TableColumn>{c.date}</TableColumn>
                 <TableColumn>{c.location}</TableColumn>
                 <TableColumn>{items}</TableColumn>
                 <TableColumn>{c.quantity}</TableColumn>
+                <TableColumn>{total}</TableColumn>
                 <TableColumn>{c.payment}</TableColumn>
                 <TableColumn>{c.other_fee}</TableColumn>
                 <TableColumn>{c.cost}</TableColumn>
