@@ -15,7 +15,7 @@ class Customer {
         if ($endDate) {
             $sql .= ' AND date <= :end';
         }
-        $sql .= ' ORDER BY date DESC';
+        $sql .= ' ORDER BY created_at DESC, updated_at DESC';
 
         $pdostmt = $this->db->prepare($sql);
         if ($startDate) {
