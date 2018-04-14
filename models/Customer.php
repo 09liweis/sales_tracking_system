@@ -39,6 +39,9 @@ class Customer {
     }
     public function upsertCustomer($customer) {
         $id = $customer['id'];
+        if ($id == '0') {
+            $createdAt = date('Y-m-d H:i:s');
+        }
         $date = $customer['date'];
         $location = $customer['location'];
         $item_name = $customer['item_name'];
@@ -51,8 +54,8 @@ class Customer {
         $profit_or_loss = $customer['profit_or_loss'];
         $status = $customer['status'];
         $remarks = $customer['remarks'];
-        $sql = 'INSERT INTO customers (id, date, location, item_name, quantity, payment, other_fee, cost, shipping_fee, packaging, profit_or_loss, status, remarks)
-                VALUES (:id, :date, :location, :item_name, :quantity, :payment, :other_fee, :cost, :shipping_fee, :packaging, :profit_or_loss, :status, :remarks)
+        $sql = 'INSERT INTO customers (id, date, location, item_name, quantity, payment, other_fee, cost, shipping_fee, packaging, profit_or_loss, status, remarks, created_at)
+                VALUES (:id, :date, :location, :item_name, :quantity, :payment, :other_fee, :cost, :shipping_fee, :packaging, :profit_or_loss, :status, :remarks, :created_at)
                 ON DUPLICATE KEY UPDATE
                 date = VALUES(`date`),
                 location = VALUES(`location`),
@@ -81,6 +84,7 @@ class Customer {
         $pdostmt->bindValue(':profit_or_loss', $profit_or_loss, PDO::PARAM_STR);
         $pdostmt->bindValue(':status', $status, PDO::PARAM_STR);
         $pdostmt->bindValue(':remarks', $remarks, PDO::PARAM_STR);
+        $pdostmt->bindValue(':created_at', $createdAt, PDO::PARAM_STR);
         $pdostmt->execute();
     }
     
