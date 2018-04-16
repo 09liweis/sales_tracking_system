@@ -53,6 +53,8 @@ class Transaction extends React.Component {
                 <TableColumn>{status}</TableColumn>
                 <TableColumn>
                     <Button flat secondary swapTheming><Link to={`/transaction/edit/${c.id}`} className="button is-danger">修改交易</Link></Button>
+                    <br/>
+                    <br/>
                     <Button flat secondary swapTheming onClick={this.props.removeTransaction.bind(this, c.id)}>删除交易</Button>
                 </TableColumn>
             </TableRow>
