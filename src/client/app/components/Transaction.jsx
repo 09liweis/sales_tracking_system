@@ -35,8 +35,10 @@ class Transaction extends React.Component {
             <TableRow key={c.id}>
                 <TableColumn>{c.date}</TableColumn>
                 <TableColumn>{c.location}</TableColumn>
-                <TableColumn>{items}</TableColumn>
-                <TableColumn>{c.quantity}</TableColumn>
+                <TableColumn>
+                    <div>购买数量: {c.quantity}</div>
+                    {items}
+                </TableColumn>
                 <TableColumn>{total}</TableColumn>
                 <TableColumn>{c.payment}</TableColumn>
                 <TableColumn>{c.other_fee}</TableColumn>
