@@ -200,7 +200,7 @@ class TransactionForm extends React.Component {
         const salesItems = this.state.salesItems.map((item) =>
             <Card key={item.id} style={{padding: '10px', marginBottom: '10px'}}>
                 <h5>{item.name}</h5>
-                <button onClick={_this.removeSalesItem.bind(_this, item)}>移除次商品</button>
+                <button style={{float: 'right'}} onClick={_this.removeSalesItem.bind(_this, item)}>移除此商品</button>
                 <p>成本价: {item.cost}</p>
                 <p>零售价: {item.retail}</p>
                 增减数量: <input type="number" className="input" value={item.sales_quantity} onChange={_this.changeQuantity.bind(_this, item)}  />
