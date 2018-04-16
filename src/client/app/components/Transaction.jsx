@@ -34,25 +34,25 @@ class Transaction extends React.Component {
         return(
             <TableRow key={c.id}>
                 <TableColumn>
-                    <div>日期: {c.date}</div>
+                    <div><b>日期:</b> {c.date}</div>
+                    <div><b>状态:</b> {status}</div>
                     <div>{c.location}</div>
                 </TableColumn>
                 <TableColumn>
-                    <div className="transaction__quantity">购买数量: {c.quantity}</div>
+                    <div className="transaction__quantity"><b>购买数量:</b> {c.quantity}</div>
                     {items}
                 </TableColumn>
                 <TableColumn>
-                    <div>总数: {total}</div>
-                    <div>买家付款: {c.payment}</div>
-                    <div>其他费用: {c.other_fee}</div>
+                    <div><b>总数:</b> {total}</div>
+                    <div><b>买家付款:</b> {c.payment}</div>
+                    <div><b>其他费用:</b> {c.other_fee}</div>
                 </TableColumn>
-                <TableColumn>{c.cost}</TableColumn>
                 <TableColumn>
-                    <div>运费: {c.shipping_fee}</div>
-                    <div>包装: {c.packaging}</div>
+                    <div><b>成本:</b> {c.cost}</div>
+                    <div><b>运费:</b> {c.shipping_fee}</div>
+                    <div><b>包装:</b> {c.packaging}</div>
                 </TableColumn>
                 <TableColumn className={(c.profit_or_loss < 0) ? 'has-text-danger' : ''}>{c.profit_or_loss}</TableColumn>
-                <TableColumn>{status}</TableColumn>
                 <TableColumn>
                     <Button flat secondary swapTheming className="action__button"><Link to={`/transaction/edit/${c.id}`} className="button is-danger">修改交易</Link></Button>
                     <Button flat secondary swapTheming className="action__button" onClick={this.props.removeTransaction.bind(this, c.id)}>删除交易</Button>
