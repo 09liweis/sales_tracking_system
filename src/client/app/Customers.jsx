@@ -52,8 +52,7 @@ class Customers extends React.Component {
                 <DataTable plain>
                     <TableHeader>
                         <TableRow>
-                            <TableColumn>日期</TableColumn>
-                            <TableColumn>买家所在地</TableColumn>
+                            <TableColumn>交易</TableColumn>
                             <TableColumn>出售商品</TableColumn>
                             <TableColumn>收取费用</TableColumn>
                             <TableColumn>成本</TableColumn>

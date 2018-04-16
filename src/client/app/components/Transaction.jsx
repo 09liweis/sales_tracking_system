@@ -33,8 +33,10 @@ class Transaction extends React.Component {
         const total = parseFloat(c.payment) + parseFloat(c.other_fee);
         return(
             <TableRow key={c.id}>
-                <TableColumn>{c.date}</TableColumn>
-                <TableColumn>{c.location}</TableColumn>
+                <TableColumn>
+                    <div>日期: {c.date}</div>
+                    <div>{c.location}</div>
+                </TableColumn>
                 <TableColumn>
                     <div className="transaction__quantity">购买数量: {c.quantity}</div>
                     {items}
