@@ -36,12 +36,14 @@ class Transaction extends React.Component {
                 <TableColumn>{c.date}</TableColumn>
                 <TableColumn>{c.location}</TableColumn>
                 <TableColumn>
-                    <div>购买数量: {c.quantity}</div>
+                    <div class="transaction__quantity">购买数量: {c.quantity}</div>
                     {items}
                 </TableColumn>
-                <TableColumn>{total}</TableColumn>
-                <TableColumn>{c.payment}</TableColumn>
-                <TableColumn>{c.other_fee}</TableColumn>
+                <TableColumn>
+                    <div>总数: {total}</div>
+                    <div>买家付款: {c.payment}</div>
+                    <div>其他费用: {c.other_fee}</div>
+                </TableColumn>
                 <TableColumn>{c.cost}</TableColumn>
                 <TableColumn>{c.shipping_fee}</TableColumn>
                 <TableColumn>{c.packaging}</TableColumn>
