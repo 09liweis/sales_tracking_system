@@ -52,10 +52,8 @@ class Transaction extends React.Component {
                 <TableColumn className={(c.profit_or_loss < 0) ? 'has-text-danger' : ''}>{c.profit_or_loss}</TableColumn>
                 <TableColumn>{status}</TableColumn>
                 <TableColumn>
-                    <Button flat secondary swapTheming><Link to={`/transaction/edit/${c.id}`} className="button is-danger">修改交易</Link></Button>
-                    <br/>
-                    <br/>
-                    <Button flat secondary swapTheming onClick={this.props.removeTransaction.bind(this, c.id)}>删除交易</Button>
+                    <Button flat secondary swapTheming className="action__button"><Link to={`/transaction/edit/${c.id}`} className="button is-danger">修改交易</Link></Button>
+                    <Button flat secondary swapTheming className="action__button" onClick={this.props.removeTransaction.bind(this, c.id)}>删除交易</Button>
                 </TableColumn>
             </TableRow>
         );
