@@ -36,7 +36,7 @@ class Transaction extends React.Component {
                 <TableColumn>{c.date}</TableColumn>
                 <TableColumn>{c.location}</TableColumn>
                 <TableColumn>
-                    <div class="transaction__quantity">购买数量: {c.quantity}</div>
+                    <div className="transaction__quantity">购买数量: {c.quantity}</div>
                     {items}
                 </TableColumn>
                 <TableColumn>
@@ -45,11 +45,12 @@ class Transaction extends React.Component {
                     <div>其他费用: {c.other_fee}</div>
                 </TableColumn>
                 <TableColumn>{c.cost}</TableColumn>
-                <TableColumn>{c.shipping_fee}</TableColumn>
-                <TableColumn>{c.packaging}</TableColumn>
+                <TableColumn>
+                    <div>运费: {c.shipping_fee}</div>
+                    <div>包装: {c.packaging}</div>
+                </TableColumn>
                 <TableColumn className={(c.profit_or_loss < 0) ? 'has-text-danger' : ''}>{c.profit_or_loss}</TableColumn>
                 <TableColumn>{status}</TableColumn>
-                <TableColumn>{c.remarks}</TableColumn>
                 <TableColumn>
                     <Button flat secondary swapTheming><Link to={`/transaction/edit/${c.id}`} className="button is-danger">修改交易</Link></Button>
                     <Button flat secondary swapTheming onClick={this.props.removeTransaction.bind(this, c.id)}>删除交易</Button>
