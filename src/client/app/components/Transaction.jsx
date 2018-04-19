@@ -48,13 +48,13 @@ class Transaction extends React.Component {
                 <p key={item.id}>{item.name} X {item.sales_quantity}</p>
             );   
         }
-        
+        const statusColor = this.getStatusColor(c.status);
         const total = parseFloat(c.payment) + parseFloat(c.other_fee);
         return(
-            <TableRow key={c.id}>
+            <TableRow key={c.id} style={{borderLeft: `4px solid ${statusColor}`}}>
                 <TableColumn>
                     <div><b>日期:</b> {c.date}</div>
-                    <div><b>状态:</b> <span style={{color: this.getStatusColor(c.status)}}>{this.getStatus(c.status)}</span></div>
+                    <div><b>状态:</b> <span style={{color: statusColor}}>{this.getStatus(c.status)}</span></div>
                     <div>{c.location}</div>
                 </TableColumn>
                 <TableColumn>
