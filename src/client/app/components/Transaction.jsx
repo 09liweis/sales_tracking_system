@@ -10,16 +10,9 @@ class Transaction extends React.Component {
     constructor(props) {
         super(props);
     }
-    render() {
-        const c = this.props.c;
-        var items = null;
-        if (c.item_name != '') {
-            items = JSON.parse(c.item_name).map((item) =>
-                <p key={item.id}>{item.name} X {item.sales_quantity}</p>
-            );   
-        }
-        var status = '未发货';
-        switch (c.status) {
+    getStatus(code) {
+        let status = '未发货';
+        switch (code) {
             case '0':
                 status = '未发货';
                 break;
@@ -30,12 +23,38 @@ class Transaction extends React.Component {
                 status = '已收货';
                 break;
         }
+        return status;
+    }
+    getStatusColor(code) {
+        let color = '#000000';
+        switch (code) {
+            case '0':
+                color = '#FF3D00';
+                break;
+            case '1':
+                color = '#01579B';
+                break;
+            case '2':
+                color = '#4CAF50';
+                break;
+        }
+        return color;
+    }
+    render() {
+        const c = this.props.c;
+        var items = null;
+        if (c.item_name != '') {
+            items = JSON.parse(c.item_name).map((item) =>
+                <p key={item.id}>{item.name} X {item.sales_quantity}</p>
+            );   
+        }
+        
         const total = parseFloat(c.payment) + parseFloat(c.other_fee);
         return(
             <TableRow key={c.id}>
                 <TableColumn>
                     <div><b>日期:</b> {c.date}</div>
-                    <div><b>状态:</b> {status}</div>
+                    <div><b>状态:</b> <span style={{color: this.getStatusColor(c.status)}}>{this.getStatus(c.status)}</span></div>
                     <div>{c.location}</div>
                 </TableColumn>
                 <TableColumn>
