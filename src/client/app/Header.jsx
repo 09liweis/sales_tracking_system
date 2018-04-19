@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Birthday from './components/Birthday.jsx';
 
 import { Button, Drawer, Toolbar, ListItem } from 'react-md';
 
@@ -56,6 +57,7 @@ class Header extends React.Component {
                 />
               )}
             />
+            <Birthday />
             </div>
         );
     }
