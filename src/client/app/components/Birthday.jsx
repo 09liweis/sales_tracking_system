@@ -37,9 +37,9 @@ export default class Birthday extends React.Component {
     render() {
         const {expired, days, hours, minutes, seconds} = this.state;
         return (
-            <div className="countdown">
+            <h1 className="countdown">
                 {expired ? '生日快乐！！！yan的生日过了' : '还有'} {days}天 {hours}时 {minutes}分 {seconds}秒
-            </div>
+            </h1>
         );
     }
 }
