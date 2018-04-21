@@ -8,7 +8,8 @@ export default class Birthday extends React.Component {
             days: 0,
             hours: 0,
             minutes: 0,
-            seconds: 0
+            seconds: 0,
+            expired: false,
         };
     }
     componentDidMount() {
@@ -18,7 +19,13 @@ export default class Birthday extends React.Component {
         const birthday = this.state.birthday;
         this.countdown = setInterval(() => {
             const now = new Date().getTime();
-            const distance = birthday - now;
+            let distance = birthday - now;
+            if (distance < 0) {
+                this.setState({
+                    expired: true
+                });
+                distance = Math.abs(distance);
+            }
             this.setState({
                 days: Math.floor(distance / (1000 * 60 * 60 * 24)),
                 hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
@@ -28,10 +35,10 @@ export default class Birthday extends React.Component {
         }, 1000);
     }
     render() {
-        const {days, hours, minutes, seconds} = this.state;
+        const {expired, days, hours, minutes, seconds} = this.state;
         return (
             <div className="countdown">
-                还有 {days}天 {hours}时 {minutes}分 {seconds}秒
+                {expired ? '生日快乐！！！yan的生日过了' : '还有'} {days}天 {hours}时 {minutes}分 {seconds}秒
             </div>
         );
     }
