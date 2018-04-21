@@ -28,15 +28,16 @@ class Header extends React.Component {
         const { visible, position } = this.state;
         const isLeft = position === 'left';
         const closeBtn = <Button icon onClick={this.closeDrawer.bind(this)}>{isLeft ? 'arrow_back' : 'close'}</Button>;
-        return (
-            <div>
+        return ([
             <Toolbar
                 colored
                 nav={<Button flat onClick={this.openMenu.bind(this)}>菜单</Button>}
                 title="Yan的淘宝交易管理"
+                key="toolbar"
                 
-            />
+            />,
             <Drawer
+                key="drawer"
                 id="simple-drawer-example"
                 type={Drawer.DrawerTypes.TEMPORARY}
                 visible={visible}
@@ -56,10 +57,9 @@ class Header extends React.Component {
                     className="md-divider-border md-divider-border--bottom"
                 />
               )}
-            />
-            <Birthday />
-            </div>
-        );
+            />,
+            <Birthday key="birthday" />
+        ]);
     }
 
 }
