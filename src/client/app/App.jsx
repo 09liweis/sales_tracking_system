@@ -2,11 +2,9 @@ import React from 'react';
 import Header from './Header.jsx';
 import Main from './Main.jsx';
 
-const App = () => (
-  <div>
-    <Header />
-    <Main />
-  </div>
-);
+const App = () => ([
+    <Header key="header" />,
+    <Main key="main"/>
+]);
 
 export default App;
