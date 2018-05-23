@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, DatePicker, Grid, Cell } from 'react-md';
+import { Button, DatePicker, Grid, Cell, TextField } from 'react-md';
 
 import Customers from '../Customers.jsx';
 import $ from 'jquery';
@@ -12,6 +12,7 @@ class Home extends React.Component {
         super();
         this.state = {
             customers: [],
+            search: '',
             date: {
                 start: '',
                 end: ''
@@ -64,13 +65,21 @@ class Home extends React.Component {
         });
     }
     render() {
-        const {customers, date} = this.state;
+        const {customers, date, search} = this.state;
         var total_payment = 0.0;
         var total_cost = 0.0;
         var total_shipping = 0.0;
         var total_packaging = 0.0;
         var total_profit_or_loss = 0.0;
-        customers.map((c) => {
+        let filteredC = customers;
+        if (search != '') {
+            filteredC = customers.filter((c) => {
+                if (c.location.indexOf(search) != -1) {
+                    return c;
+                } 
+            });
+        }
+        filteredC.map((c) => {
             total_payment += parseFloat(c.payment);
             total_cost += parseFloat(c.cost);
             total_shipping += parseFloat(c.shipping_fee);
@@ -122,7 +131,16 @@ class Home extends React.Component {
                     </Cell>
                 </Grid>
                 
-                <Customers customers={customers} removeTransaction={this.removeTransaction} />
+                <TextField
+                    id="search"
+                    label="搜索名字或地址"
+                    name="date"
+                    value={this.state.search}
+                    onChange={(v) => this.setState({search: v})}
+                    lineDirection="center"
+                    className="md-cell md-cell--bottom"
+                />
+                <Customers customers={filteredC} removeTransaction={this.removeTransaction} />
             </div>
         );
     }
