@@ -1,11 +1,11 @@
 <?php
 
 require '../models/Database.php';
-require '../models/Customer.php';
+require '../models/Transaction.php';
 
 //require 'vendor/autoload.php';
 
-$transactionRepo = new Customer(Database::dbConnect());
+$transactionRepo = new Transaction(Database::dbConnect());
 
 header('Content-Type: application/json');
 
