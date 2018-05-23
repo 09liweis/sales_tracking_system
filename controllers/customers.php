@@ -9,7 +9,7 @@ $transactionRepo = new Transaction(Database::dbConnect());
 
 header('Content-Type: application/json');
 
-if ($_GET['action'] == 'getCustomers') {
+if ($_GET['action'] == 'getTransactions') {
     $options = $_GET['date'];
     $transactions = $transactionRepo->transactions($options);
     echo json_encode($transactions);

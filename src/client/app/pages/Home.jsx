@@ -43,7 +43,7 @@ class Home extends React.Component {
     getCustomers() {
         const _this = this;
         $.ajax({
-            url: '/controllers/customers.php?action=getCustomers',
+            url: '/controllers/customers.php?action=getTransactions',
             data: {date: _this.state.date},
             success(res) {
                 _this.setState({
