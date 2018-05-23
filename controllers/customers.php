@@ -5,31 +5,31 @@ require '../models/Customer.php';
 
 //require 'vendor/autoload.php';
 
-$customerRepo = new Customer(Database::dbConnect());
+$transactionRepo = new Customer(Database::dbConnect());
 
 header('Content-Type: application/json');
 
 if ($_GET['action'] == 'getCustomers') {
     $options = $_GET['date'];
-    $transactions = $customerRepo->transactions($options);
+    $transactions = $transactionRepo->transactions($options);
     echo json_encode($transactions);
 }
 
 if ($_GET['action'] == 'getCustomer') {
-    $transaction = $customerRepo->transaction($_GET['id']);
+    $transaction = $transactionRepo->transaction($_GET['id']);
     echo json_encode($transaction);
 }
 
 if ($_GET['action'] == 'upsertCustomer') {
     $customer = $_POST;
-    $customerRepo->upsertCustomer($customer);
+    $transactionRepo->upsertCustomer($customer);
     $result = array('msg' => 'Update', 'status' => 200);
     echo json_encode($result);
 }
 
 if ($_GET['action'] == 'delete') {
     $id = $_POST['id'];
-    $customerRepo->delete($id);
+    $transactionRepo->delete($id);
     echo json_encode(200);
 }
 
@@ -50,6 +50,6 @@ if ($_GET['action'] == 'importCustomers') {
             'status' => 0,
             'remarks' => ''
         );
-        $customerRepo->upsertCustomer($sale);
+        $transactionRepo->upsertCustomer($sale);
     }
 }
