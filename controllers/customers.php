@@ -21,8 +21,8 @@ if ($_GET['action'] == 'getCustomer') {
 }
 
 if ($_GET['action'] == 'upsertCustomer') {
-    $customer = $_POST;
-    $transactionRepo->upsertCustomer($customer);
+    $transaction = $_POST;
+    $transactionRepo->upsert($transaction);
     $result = array('msg' => 'Update', 'status' => 200);
     echo json_encode($result);
 }
