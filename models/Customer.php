@@ -37,7 +37,7 @@ class Customer {
         $transaction = $pdostmt->fetch(PDO::FETCH_ASSOC);
         return $transaction;
     }
-    public function upsertCustomer($transaction) {
+    public function upsert($transaction) {
         $id = $transaction['id'];
         if ($id == '0') {
             $createdAt = date('Y-m-d H:i:s');
