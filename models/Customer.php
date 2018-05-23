@@ -5,7 +5,7 @@ class Customer {
         $this->db = $db;
     }
     
-    public function customers($options) {
+    public function transactions($options) {
         $startDate = $options['start'];
         $endDate = $options['end'];
         $sql = 'SELECT * FROM customers WHERE 1';
@@ -25,8 +25,8 @@ class Customer {
             $pdostmt->bindValue(':end', $endDate, PDO::PARAM_STR);
         }
         $pdostmt->execute();
-        $customers = $pdostmt->fetchAll(PDO::FETCH_ASSOC);
-        return $customers;
+        $transactions = $pdostmt->fetchAll(PDO::FETCH_ASSOC);
+        return $transactions;
     }
     
     public function customer($id) {

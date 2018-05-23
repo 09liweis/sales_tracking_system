@@ -11,7 +11,7 @@ header('Content-Type: application/json');
 
 if ($_GET['action'] == 'getCustomers') {
     $options = $_GET['date'];
-    $customers = $customerRepo->customers($options);
+    $customers = $customerRepo->transactions($options);
     echo json_encode($customers);
 }
 
