@@ -37,23 +37,23 @@ class Customer {
         $transaction = $pdostmt->fetch(PDO::FETCH_ASSOC);
         return $transaction;
     }
-    public function upsertCustomer($customer) {
-        $id = $customer['id'];
+    public function upsertCustomer($transaction) {
+        $id = $transaction['id'];
         if ($id == '0') {
             $createdAt = date('Y-m-d H:i:s');
         }
-        $date = $customer['date'];
-        $location = $customer['location'];
-        $item_name = $customer['item_name'];
-        $quantity = $customer['quantity'];
-        $payment = $customer['payment'];
-        $other_fee = $customer['other_fee'];
-        $cost = $customer['cost'];
-        $shipping_fee = $customer['shipping_fee'];
-        $packaging = $customer['packaging'];
-        $profit_or_loss = $customer['profit_or_loss'];
-        $status = $customer['status'];
-        $remarks = $customer['remarks'];
+        $date = $transaction['date'];
+        $location = $transaction['location'];
+        $item_name = $transaction['item_name'];
+        $quantity = $transaction['quantity'];
+        $payment = $transaction['payment'];
+        $other_fee = $transaction['other_fee'];
+        $cost = $transaction['cost'];
+        $shipping_fee = $transaction['shipping_fee'];
+        $packaging = $transaction['packaging'];
+        $profit_or_loss = $transaction['profit_or_loss'];
+        $status = $transaction['status'];
+        $remarks = $transaction['remarks'];
         $sql = 'INSERT INTO customers (id, date, location, item_name, quantity, payment, other_fee, cost, shipping_fee, packaging, profit_or_loss, status, remarks, created_at)
                 VALUES (:id, :date, :location, :item_name, :quantity, :payment, :other_fee, :cost, :shipping_fee, :packaging, :profit_or_loss, :status, :remarks, :created_at)
                 ON DUPLICATE KEY UPDATE
