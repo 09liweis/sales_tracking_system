@@ -69,7 +69,7 @@ class TransactionForm extends React.Component {
     getTransaction(id) {
         const _this = this;
         $.ajax({
-            url: '/controllers/customers.php?action=getCustomer',
+            url: '/controllers/customers.php?action=getTransaction',
             data: {id: id},
             method: 'GET',
             success(res) {

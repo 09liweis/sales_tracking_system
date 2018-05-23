@@ -15,7 +15,7 @@ if ($_GET['action'] == 'getTransactions') {
     echo json_encode($transactions);
 }
 
-if ($_GET['action'] == 'getCustomer') {
+if ($_GET['action'] == 'getTransaction') {
     $transaction = $transactionRepo->transaction($_GET['id']);
     echo json_encode($transaction);
 }
