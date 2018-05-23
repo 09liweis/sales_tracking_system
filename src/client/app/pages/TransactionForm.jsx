@@ -181,7 +181,7 @@ class TransactionForm extends React.Component {
         c.profit_or_loss = (total_payment - c.cost - c.shipping_fee - c.packaging).toFixed(2);
         const _this = this;
         $.ajax({
-            url: '/controllers/customers.php?action=upsertCustomer',
+            url: '/controllers/customers.php?action=upsert',
             method: 'POST',
             data: c,
             success(res) {

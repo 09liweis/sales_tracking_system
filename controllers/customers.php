@@ -20,7 +20,7 @@ if ($_GET['action'] == 'getTransaction') {
     echo json_encode($transaction);
 }
 
-if ($_GET['action'] == 'upsertCustomer') {
+if ($_GET['action'] == 'upsert') {
     $transaction = $_POST;
     $transactionRepo->upsert($transaction);
     $result = array('msg' => 'Update', 'status' => 200);
