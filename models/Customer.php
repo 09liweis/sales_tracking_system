@@ -29,13 +29,13 @@ class Customer {
         return $transactions;
     }
     
-    public function customer($id) {
+    public function transaction($id) {
         $sql = 'SELECT * FROM customers WHERE id = :id';
         $pdostmt = $this->db->prepare($sql);
         $pdostmt->bindValue(':id', $id, PDO::PARAM_INT);
         $pdostmt->execute();
-        $customer = $pdostmt->fetch(PDO::FETCH_ASSOC);
-        return $customer;
+        $transaction = $pdostmt->fetch(PDO::FETCH_ASSOC);
+        return $transaction;
     }
     public function upsertCustomer($customer) {
         $id = $customer['id'];

@@ -11,13 +11,13 @@ header('Content-Type: application/json');
 
 if ($_GET['action'] == 'getCustomers') {
     $options = $_GET['date'];
-    $customers = $customerRepo->transactions($options);
-    echo json_encode($customers);
+    $transactions = $customerRepo->transactions($options);
+    echo json_encode($transactions);
 }
 
 if ($_GET['action'] == 'getCustomer') {
-    $customer = $customerRepo->customer($_GET['id']);
-    echo json_encode($customer);
+    $transaction = $customerRepo->transaction($_GET['id']);
+    echo json_encode($transaction);
 }
 
 if ($_GET['action'] == 'upsertCustomer') {
